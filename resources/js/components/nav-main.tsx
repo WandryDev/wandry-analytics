@@ -6,31 +6,34 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { resolveUrl } from '@/lib/utils';
-import { type NavItem } from '@/types';
+import registry from '@/routes/registry';
 import { Link, usePage } from '@inertiajs/react';
 
-export function NavMain({ items = [] }: { items: NavItem[] }) {
-    const page = usePage();
+export function NavMain() {
+    const page = usePage<any>();
+    const registies = page.props.auth.registies;
+
     return (
         <SidebarGroup className="px-2 py-0">
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupLabel>Registries</SidebarGroupLabel>
             <SidebarMenu>
-                {items.map((item) => (
-                    <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton
-                            asChild
-                            isActive={page.url.startsWith(
-                                resolveUrl(item.href),
-                            )}
-                            tooltip={{ children: item.title }}
-                        >
-                            <Link href={item.href} prefetch>
-                                {item.icon && <item.icon />}
-                                <span>{item.title}</span>
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                ))}
+                {registies?.length > 0 &&
+                    registies.map((item: any) => (
+                        <SidebarMenuItem key={item.id}>
+                            <SidebarMenuButton
+                                asChild
+                                isActive={page.url.includes(
+                                    resolveUrl(item.id),
+                                )}
+                                tooltip={{ children: item.name }}
+                            >
+                                <Link href={registry.show(item.id)} prefetch>
+                                    {item.icon && <item.icon />}
+                                    <span>{item.name}</span>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    ))}
             </SidebarMenu>
         </SidebarGroup>
     );

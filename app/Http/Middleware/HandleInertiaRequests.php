@@ -44,7 +44,21 @@ class HandleInertiaRequests extends Middleware
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $request->user(),
+                'registies' => [
+                    [
+                        'id' => "1",
+                        'name' => '@wandry-ui',
+                        'url' => 'https://ui.wandry.com.ua'
+                    ],
+                    [
+                        'id' => "2",
+                        'name' => '@wandry-api',
+                        'url' => 'https://ui.wandry.com.ua'
+                    ],
+                    
+                ]
             ],
+            
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

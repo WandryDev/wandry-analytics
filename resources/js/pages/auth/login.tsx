@@ -1,15 +1,16 @@
+import { Head } from '@inertiajs/react';
+import { Form } from '@wandry/inertia-form';
+
 import CheckboxField from '@/components/checkbox-field';
 import PasswordField from '@/components/password-field';
 import SubmitButton from '@/components/submit-button';
 import TextField from '@/components/text-field';
 import TextLink from '@/components/text-link';
 import AuthLayout from '@/layouts/auth-layout';
+
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
-import { Head } from '@inertiajs/react';
-
-import { Form } from '@wandry/inertia-form';
 
 interface LoginProps {
     status?: string;
