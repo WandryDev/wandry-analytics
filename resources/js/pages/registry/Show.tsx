@@ -16,6 +16,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 type RegistryShowProps = {
+    token: string;
     registry: any;
     analytics: {
         totals: Totals;
@@ -26,16 +27,17 @@ type RegistryShowProps = {
 export default function Show() {
     const page = usePage<SharedData & RegistryShowProps>();
     const registry = page.props.registry;
+    const token = page.props.token;
 
     console.log('page', page);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={registry.name} />
-            {page.props.analytics ? (
+            {!page.props.token ? (
                 <RegistryStats />
             ) : (
-                <SetupRegistry registry={registry} />
+                <SetupRegistry registry={registry} token={token} />
             )}
         </AppLayout>
     );

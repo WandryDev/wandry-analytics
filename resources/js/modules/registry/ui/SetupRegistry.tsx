@@ -7,12 +7,17 @@ import { Button } from '@/components/ui/button';
 import TextField from '@/components/text-field';
 import { toast } from 'sonner';
 import { Spinner } from '@/components/ui/spinner';
+import { SetupCodeBlock } from '@/components/setup-code-block';
 
 type SetupRegistryProps = {
+    token: string;
     registry: any;
 };
 
-export const SetupRegistry: React.FC<SetupRegistryProps> = ({ registry }) => {
+export const SetupRegistry: React.FC<SetupRegistryProps> = ({
+    registry,
+    token,
+}) => {
     const [loading, setLoading] = React.useState(false);
     const testSdk = async () => {
         setLoading(true);
@@ -75,11 +80,7 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({ registry }) => {
                             Get the token and add it to your project.
                         </h3>
                     </div>
-                    <Form
-                        action=""
-                        method="post"
-                        defaultValues={{ token: registry.token }}
-                    >
+                    <Form action="" method="post" defaultValues={{ token }}>
                         <TextField readOnly name="token" />
                     </Form>
                 </div>
@@ -97,15 +98,7 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({ registry }) => {
                         For a Nextjs project paste this code snippet in your
                         middleware or API route
                     </p>
-                    <CodeBlock
-                        code={`import { captureRegistryEvents } from '@wandry/analytics-sdk';
-
-export function middleware(request: NextRequest) {                                
-    captureRegistryEvents(request, ${registry.token ?? 'token'});
-    return NextResponse.next();
-}`}
-                        lang="bash"
-                    />
+                    <SetupCodeBlock token={token} />
                 </div>
             </div>
             <Button

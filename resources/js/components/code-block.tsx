@@ -30,9 +30,9 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, lang }) => {
     }, [code, lang]);
 
     return (
-        <div className="relative w-fit rounded-lg bg-muted px-4 py-2 pr-15">
+        <div className="relative w-full rounded-lg bg-muted px-4 py-2 pr-15">
             <div
-                className="not-prose"
+                className="not-prose w-full"
                 dangerouslySetInnerHTML={{ __html: html }}
             />
             <Button

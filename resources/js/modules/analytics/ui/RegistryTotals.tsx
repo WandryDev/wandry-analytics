@@ -27,6 +27,7 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
     });
 
     useEffect(() => {
+        console.log('data', data);
         setTotals(data);
     }, [data]);
 

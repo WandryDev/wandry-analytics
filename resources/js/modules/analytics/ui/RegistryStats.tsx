@@ -19,7 +19,11 @@ type RegistryAnalyticsProps = {
 export const RegistryStats: React.FC = () => {
     const page = usePage<SharedData & RegistryAnalyticsProps>();
     const registry = page.props.registry;
-    const registryTotals = page.props.analytics.totals;
+    const registryTotals = page.props.analytics?.totals ?? {
+        days: 0,
+        views: 0,
+        visitors: 0,
+    };
 
     return (
         <div className="space-y-4 px-6 py-10">
@@ -31,16 +35,17 @@ export const RegistryStats: React.FC = () => {
                 </div>
             </div>
             <RegistryTotals data={registryTotals} />
-            {Object.entries(page.props.analytics.analytics).map(
-                ([component, data]) => (
-                    <AnalyticsCharts
-                        key={component}
-                        component={component}
-                        data={data}
-                        totals={registryTotals}
-                    />
-                ),
-            )}
+            {page.props.analytics &&
+                Object.entries(page.props.analytics?.analytics).map(
+                    ([component, data]) => (
+                        <AnalyticsCharts
+                            key={component}
+                            component={component}
+                            data={data}
+                            totals={registryTotals}
+                        />
+                    ),
+                )}
         </div>
     );
 };

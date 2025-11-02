@@ -18,6 +18,8 @@ import {
     InputGroupInput,
 } from '@/components/ui/input-group';
 import { Spinner } from '@/components/ui/spinner';
+import { router } from '@inertiajs/react';
+import { SetupCodeBlock } from '@/components/setup-code-block';
 
 type RegenerateTokenFormProps = {
     registryId: number;
@@ -38,7 +40,7 @@ export const RegerateTokenModal: React.FC<RegerateTokenModalProps> = ({
             <DialogTrigger asChild>
                 <Button className="cursor-pointer">Regenerate token</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="md:max-w-[65vw]">
                 <DialogHeader>
                     <DialogTitle>Create a new token</DialogTitle>
                     <DialogDescription>
@@ -61,14 +63,17 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
     const [loading, setLoading] = useState(false);
     const [token, setToken] = useState('******************');
 
+    // TODO: PEREPISATb НА NORMALNUЮ HUINU
     const onRegenerate = async () => {
         setLoading(true);
-        const response = await fetch(
-            `registry/${registryId}/token-regenerate`,
-            {
-                method: 'POST',
+        const response = await fetch(`${registryId}/token-regenerate`, {
+            headers: {
+                'X-CSRF-TOKEN': document
+                    .querySelector('meta[name="csrf-token"]')
+                    ?.getAttribute('content') as string,
             },
-        );
+            method: 'POST',
+        });
 
         if (!response.ok) {
             setLoading(false);
@@ -79,7 +84,6 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
         const data = await response.json();
         setToken(data.token);
         toast.success('Token regenerated successfully.');
-        onSuccess();
         setLoading(false);
     };
 
@@ -110,6 +114,8 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
                     This is your registry token. Keep it secret.
                 </FieldDescription>
             </Field>
+
+            <SetupCodeBlock token={token} />
         </>
     );
 };
