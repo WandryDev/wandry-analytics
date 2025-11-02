@@ -71,7 +71,7 @@ export function AnalyticsCharts({
     return (
         <Card className="border-0 px-0 shadow-none">
             <CardHeader className="px-0">
-                <RegistryTotals data={totals} title={component} />
+                {/* <RegistryTotals data={totals} title={component} /> */}
             </CardHeader>
             <CardContent className="px-0">
                 <ChartContainer
