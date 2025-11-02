@@ -32,7 +32,7 @@ class Registry extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tokens()
+    public function token()
     {
         return $this->hasOne(PersonalAccessToken::class, 'registry_id');
     }

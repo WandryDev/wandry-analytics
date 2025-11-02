@@ -13,7 +13,7 @@ class RegistryService
     {
     }
 
-    public function store(RegistryData $registryData): Registry
+    public function store(RegistryData $registryData): array
     {
         $user = auth()->user();
 
@@ -27,7 +27,10 @@ class RegistryService
         $accessToken->registry_id = $registry->id;
         $accessToken->save();
 
-        return $registry;
+        return [
+            'registry' => $registry,
+            'token' => $token->plainTextToken,
+        ];
     }
 
     public function show(Registry $registry, string $period = 'week'): array|null
@@ -66,6 +69,7 @@ class RegistryService
         $startOfDay = Carbon::now()->startOfDay()->toDateString();
 
         $totals = [
+            'total' => $registry->events()->count(),
             'month' => $registry->events()->where('created_at', '>=', $startOfMonth)->count(),
             'week' => $registry->events()->where('created_at','>=', $weekAgo)->count(),
             'day' => $registry->events()->where('created_at', '>=', $startOfDay)->count(),

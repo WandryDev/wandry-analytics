@@ -29,7 +29,7 @@ class RegistryController extends Controller
 
         return Inertia::render('registry/Show', [
             'registry' => $registry,
-            'analytics' => $analytics, // если тут возвращается null отображай страничку с их токеном и как интегрировать в код. Токен внутри $registry
+            'analytics' => $analytics, // тут может быть null если у регистри нету ивентов
         ]);
     }
 
@@ -42,8 +42,8 @@ class RegistryController extends Controller
     {
         $data = $request->validated();
 
-        $registry = $this->registryService->store(RegistryData::from($data));
+        $registryData = $this->registryService->store(RegistryData::from($data));
 
-        return redirect()->route('registry.show', $registry);
+        return redirect()->route('registry.show', $registryData);
     }
 }
