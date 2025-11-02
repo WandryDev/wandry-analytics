@@ -11,7 +11,7 @@ export const SetupCodeBlock: React.FC<SetupCodeBlockProps> = ({ token }) => {
             code={`import { captureRegistryEvents } from '@wandry/analytics-sdk';
         
 export function middleware(request: NextRequest) {                                
-    captureRegistryEvents(request, ${token ?? 'token'});
+    captureRegistryEvents(request, "${token ?? 'token'}");
     return NextResponse.next();
 }`}
             lang="bash"

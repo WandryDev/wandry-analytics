@@ -22,7 +22,9 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
     const testSdk = async () => {
         setLoading(true);
         const registryJsonUrl = `${registry.url}/r/registry.json`;
-        const response = await fetch(registryJsonUrl);
+        const response = await fetch(registryJsonUrl, {
+            credentials: 'include',
+        });
 
         if (response.ok) {
             toast.info('Try to fetch registry.json succeeded!', {

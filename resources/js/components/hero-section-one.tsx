@@ -134,7 +134,7 @@ export default function HeroSection() {
                             </p>
 
                             <Button asChild size="lg">
-                                <Link href={login()}>
+                                <Link href={register()}>
                                     <span className="btn-label">
                                         Start analytics for free
                                     </span>
