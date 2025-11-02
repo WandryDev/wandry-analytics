@@ -11,14 +11,14 @@ import { Link, usePage } from '@inertiajs/react';
 
 export function NavMain() {
     const page = usePage<any>();
-    const registies = page.props.auth.registies;
+    const registries = page.props.auth.registries;
 
     return (
         <SidebarGroup className="px-2 py-0">
             <SidebarGroupLabel>Registries</SidebarGroupLabel>
             <SidebarMenu>
-                {registies?.length > 0 &&
-                    registies.map((item: any) => (
+                {registries?.length > 0 &&
+                    registries.map((item: any) => (
                         <SidebarMenuItem key={item.id}>
                             <SidebarMenuButton
                                 asChild

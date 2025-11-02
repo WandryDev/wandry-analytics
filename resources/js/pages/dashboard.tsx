@@ -1,8 +1,9 @@
+import { Head, usePage } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
-import { AnalyticsCharts } from '@/modules/AnalyticsCharts';
 import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { SharedData, type BreadcrumbItem } from '@/types';
+import { EmptyRegistries } from '@/modules/registry/ui/EmptyRegistries';
+import { RegistriesList } from '@/modules/registry/ui/RegestiesList';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -12,14 +13,20 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard() {
+    const { props } = usePage<SharedData>();
+
+    const registries = props.auth.registries;
+
+    console.log('props.auth', props.auth);
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <div className="space-y-10 px-6 py-10">
-                <AnalyticsCharts />
-                <AnalyticsCharts />
-                <AnalyticsCharts />
-            </div>
+            {!registries?.length ? (
+                <EmptyRegistries />
+            ) : (
+                <RegistriesList registries={registries} />
+            )}
         </AppLayout>
     );
 }

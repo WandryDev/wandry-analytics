@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import { Form } from '@wandry/inertia-form';
+import { PlusIcon } from 'lucide-react';
+
 import SubmitButton from '@/components/submit-button';
 import TextField from '@/components/text-field';
 import { Button } from '@/components/ui/button';
@@ -11,17 +15,31 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { useSidebar } from '@/components/ui/sidebar';
 import registry from '@/routes/registry';
-import { Form } from '@wandry/inertia-form';
-import { useState } from 'react';
 
-export function CreateRegistryModal() {
+type CreateRegistryModalProps = {
+    insideSidebar?: boolean;
+};
+
+export function CreateRegistryModal({
+    insideSidebar = true,
+}: CreateRegistryModalProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const { open: sidebarOpened } = useSidebar();
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button>Create a new registry</Button>
+                <Button
+                    className="cursor-pointer"
+                    size={!sidebarOpened ? 'icon' : 'default'}
+                >
+                    <PlusIcon />
+                    {!insideSidebar || sidebarOpened
+                        ? 'Create a new registry'
+                        : ''}
+                </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>

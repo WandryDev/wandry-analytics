@@ -1,12 +1,15 @@
 import { codeToHtml } from 'shiki';
 
 export async function highlightCode(code: string, language: string = 'tsx') {
+    const theme = ['dark', 'system'].includes(
+        localStorage.getItem('appearance') ?? 'system',
+    )
+        ? 'github-dark'
+        : 'github-light';
+
     const html = await codeToHtml(code, {
         lang: language,
-        themes: {
-            dark: 'github-dark',
-            light: 'github-light',
-        },
+        theme: theme ?? 'github-dark',
         transformers: [
             {
                 pre(node) {
