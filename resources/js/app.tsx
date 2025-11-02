@@ -1,6 +1,6 @@
 import '../css/app.css';
 
-import { createInertiaApp } from '@inertiajs/react';
+import { createInertiaApp, router } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -28,6 +28,15 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+
+if (import.meta.env.VITE_APP_ENV === 'production') {
+    router.on('navigate', (event) => {
+        // @ts-ignore
+        window.gtag('config', 'G-WEYV81W06Y', {
+            page_path: event.detail.page.url,
+        });
+    });
+}
 
 // This will set light / dark mode on load...
 initializeTheme();
