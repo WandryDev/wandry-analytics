@@ -16,12 +16,19 @@ class EventService
     {
         $token = request()->bearerToken();
 
-        $registry = Registry::where('api_token', $token)->first();
+        [$id, $token] = explode('|', $token, 2);
+        $tokenModel = \Laravel\Sanctum\PersonalAccessToken::find($id);
+
+        if (! $tokenModel || ! hash_equals($tokenModel->token, hash('sha256', $token))) {
+            abort(401, 'Invalid token');
+        }
+
+        $registry = Registry::find($tokenModel->registry_id);
 
         $data->ip = request()->ip() ?? '';
         $data->eventable_type = Registry::class;
         $data->eventable_id = $registry->id;
 
-        return Event::create($data);
+        return Event::create($data->toArray());
     }
 }

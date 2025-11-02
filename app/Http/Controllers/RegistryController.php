@@ -44,7 +44,7 @@ class RegistryController extends Controller
 
         $registryData = $this->registryService->store(RegistryData::from($data));
 
-        return redirect()->route('registry.show', $registryData);
+        return Inertia::render('registry/Show', $registryData);
     }
 
     public function updateToken(Registry $registry)
