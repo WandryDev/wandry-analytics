@@ -42,10 +42,10 @@ class RegistryService
         switch ($period) {
             case 'day':
                 $rawEvents = $registry->events()
-                    ->selectRaw("EXTRACT(HOUR FROM created_at) AS date, component, COUNT(*) AS total")
+                    ->selectRaw("DATE_TRUNC('hour', created_at) AS date, component, COUNT(*) AS total")
                     ->whereDate('created_at', now()->toDateString())
-                    ->groupByRaw("EXTRACT(HOUR FROM created_at), component")
-                    ->orderByRaw("EXTRACT(HOUR FROM created_at)")
+                    ->groupByRaw("DATE_TRUNC('hour', created_at), component")
+                    ->orderByRaw("DATE_TRUNC('hour', created_at)")
                     ->get();
                 break;
             case 'month':
