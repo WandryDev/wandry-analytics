@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Event;
 use App\Models\Registry;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
@@ -21,6 +22,12 @@ class EventSeeder extends Seeder
                 Event::factory()->count(500)->create([
                     'eventable_id' => $registry->id,
                     'component' => $componentName,
+                ]);
+
+                Event::factory()->count(7)->create([
+                    'eventable_id' => $registry->id,
+                    'component' => $componentName,
+                    'created_at' => Carbon::now()->subHour()
                 ]);
             }
         });

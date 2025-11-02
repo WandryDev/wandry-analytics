@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Data\RegistryData;
+use App\Models\Event;
 use App\Models\Registry;
 use Carbon\Carbon;
 
@@ -29,29 +30,50 @@ class RegistryService
         return $registry;
     }
 
-    public function show(Registry $registry): array|null
+    public function show(Registry $registry, string $period = 'week'): array|null
     {
         $rawEvents = $registry->events()
-            ->whereYear('created_at', now()->year)
-            ->get()->groupBy('component');
+            ->selectRaw('DATE(created_at) as date, component, COUNT(*) as total')
+            ->groupByRaw('DATE(created_at), component')
+            ->orderByRaw('DATE(created_at)');
+
+        switch ($period) {
+            case 'day':
+                $rawEvents = $registry->events()
+                    ->selectRaw("EXTRACT(HOUR FROM created_at) AS date, component, COUNT(*) AS total")
+                    ->whereDate('created_at', now()->toDateString())
+                    ->groupByRaw("EXTRACT(HOUR FROM created_at), component")
+                    ->orderByRaw("EXTRACT(HOUR FROM created_at)")
+                    ->get();
+                break;
+            case 'month':
+                $rawEvents = $rawEvents
+                    ->where('created_at', '>=',Carbon::now()->subDays(30))
+                    ->get();
+                break;
+            default:
+                $rawEvents = $rawEvents
+                    ->where('created_at', '>=',Carbon::now()->subDays(7))
+                    ->get();
+        }
 
         if(count($rawEvents) == 0) {
             return null;
         }
 
+        $startOfMonth = Carbon::now()->subDays(30)->toDateString();
+        $weekAgo = Carbon::now()->subDays(7)->toDateString();
+        $startOfDay = Carbon::now()->startOfDay()->toDateString();
+
         $totals = [
-            'year' => $rawEvents->count(),
-            'month' => $rawEvents->where('created_at','>=', Carbon::now()->subDays(30))->count(),
-            'day' => $rawEvents->where('created_at', '>=', Carbon::now()->startOfDay())->count(),
+            'month' => $registry->events()->where('created_at', '>=', $startOfMonth)->count(),
+            'week' => $registry->events()->where('created_at','>=', $weekAgo)->count(),
+            'day' => $registry->events()->where('created_at', '>=', $startOfDay)->count(),
         ];
 
-        $analytics = $rawEvents->map(function ($item) use ($registry) {
-            return [
-                'perYear' => $item->count(),
-                'perMonth' => $item->where('created_at','>=', Carbon::now()->subDays(30))->count(),
-                'perDay' => $item->where('created_at', '>=', Carbon::now()->startOfDay())->count(),
-            ];
-        });
+        $analytics = $rawEvents->map(function ($events) use ($startOfMonth) {
+            return collect($events->toArray());
+        })->groupBy('component')->toArray();
 
         return [
             'totals' => $totals,

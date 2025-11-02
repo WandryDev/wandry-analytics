@@ -7,21 +7,25 @@ use App\Http\Requests\RegistryRequest;
 use App\Models\Registry;
 use App\Services\RegistryService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class RegistryController extends Controller
 {
     use AuthorizesRequests;
+
     private RegistryService $registryService;
+
     public function __construct(RegistryService $registryService)
     {
         $this->registryService = $registryService;
     }
-    public function show(Registry $registry)
+
+    public function show(Request $request, Registry $registry)
     {
         $this->authorize('read', $registry);
 
-        $analytics = $this->registryService->show($registry);
+        $analytics = $this->registryService->show($registry, $request->input('period', 'week'));
 
         return Inertia::render('registry/Show', [
             'registry' => $registry,
