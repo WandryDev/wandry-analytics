@@ -14,10 +14,11 @@ class Event extends Model
         'type',
         'component',
         'ip',
+        'created_at',
     ];
 
-    public $timestamps = ['created_at'];
-    public $updated_at = null;
+    public $timestamps = false;
+    const CREATED_AT = 'created_at';
 
     public function eventable()
     {

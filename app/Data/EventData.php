@@ -13,5 +13,6 @@ class EventData extends Data
         public ?string $ip,
         public ?int $eventable_id,
         public ?string $eventable_type,
+        public ?string $created_at,
     ) {}
 }

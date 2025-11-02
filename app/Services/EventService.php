@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Data\EventData;
 use App\Models\Event;
 use App\Models\Registry;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class EventService
 {
@@ -22,12 +24,31 @@ class EventService
         if (! $tokenModel || ! hash_equals($tokenModel->token, hash('sha256', $token))) {
             abort(401, 'Invalid token');
         }
-
         $registry = Registry::find($tokenModel->registry_id);
 
         $data->ip = request()->ip() ?? '';
+
+        $event = DB::transaction(function () use ($data) {
+            $event = Event::where('ip', $data->ip)
+                ->where('created_at', '>=', Carbon::now()->subSeconds(5))
+                ->lockForUpdate()
+                ->first();
+
+            if($event){
+                $event->component = $data->component;
+                $event->save();
+            }
+
+            return $event;
+        });
+
+        if($event) {
+            return $event;
+        }
+
         $data->eventable_type = Registry::class;
         $data->eventable_id = $registry->id;
+        $data->created_at = Carbon::now();
 
         return Event::create($data->toArray());
     }
