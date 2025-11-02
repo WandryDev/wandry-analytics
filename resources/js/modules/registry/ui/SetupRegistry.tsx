@@ -5,12 +5,41 @@ import { CodeBlock } from '@/components/code-block';
 import { Button } from '@/components/ui/button';
 
 import TextField from '@/components/text-field';
+import { toast } from 'sonner';
+import { Spinner } from '@/components/ui/spinner';
 
 type SetupRegistryProps = {
     registry: any;
 };
 
 export const SetupRegistry: React.FC<SetupRegistryProps> = ({ registry }) => {
+    const [loading, setLoading] = React.useState(false);
+    const testSdk = async () => {
+        setLoading(true);
+        const registryJsonUrl = `${registry.url}/r/registry.json`;
+        const response = await fetch(registryJsonUrl);
+
+        if (response.ok) {
+            toast.info('Try to fetch registry.json succeeded!', {
+                description:
+                    'If you’re still seeing this setup guide, it means we weren’t able to collect the event.',
+            });
+
+            setTimeout(() => {
+                window.location.reload();
+                setLoading(false);
+            }, 5000);
+
+            return;
+        }
+
+        setLoading(false);
+
+        return toast.error(
+            'If you’re still seeing this setup guide, it means we weren’t able to collect the event.',
+        );
+    };
+
     return (
         <div className="max-w-full px-6 py-10 md:max-w-[55vw]">
             <h2 className="text-4xl font-extrabold tracking-tight text-balance">
@@ -81,9 +110,11 @@ export function middleware(request: NextRequest) {
             </div>
             <Button
                 className="mt-5 cursor-pointer"
-                onClick={() => window.location.reload()}
+                onClick={testSdk}
+                disabled={loading}
             >
-                Finish setup
+                {loading && <Spinner />}
+                Test event and Finish setup
             </Button>
         </div>
     );

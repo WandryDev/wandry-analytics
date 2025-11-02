@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
-        $this->call(RegistrySeeder::class);
-        $this->call(EventSeeder::class);
+        // $this->call(RegistrySeeder::class);
+        // $this->call(EventSeeder::class);
     }
 }
