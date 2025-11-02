@@ -101,7 +101,7 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({ registry }) => {
                         code={`import { captureRegistryEvents } from '@wandry/analytics-sdk';
 
 export function middleware(request: NextRequest) {                                
-    captureRegistryEvents(request, token);
+    captureRegistryEvents(request, ${registry.token ?? 'token'});
     return NextResponse.next();
 }`}
                         lang="bash"

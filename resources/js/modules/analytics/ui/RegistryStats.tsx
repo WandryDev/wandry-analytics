@@ -6,6 +6,7 @@ import { SharedData } from '@/types';
 import { PeriodFilter } from './PeriodFilter';
 import { RegistryTotals } from './RegistryTotals';
 import { AnalyticsCharts } from './AnalyticsCharts';
+import { RegerateTokenModal } from './RegerateTokenModal';
 
 type RegistryAnalyticsProps = {
     registry: any;
@@ -24,7 +25,10 @@ export const RegistryStats: React.FC = () => {
         <div className="space-y-4 px-6 py-10">
             <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-bold">{registry.name}</h1>
-                <PeriodFilter />
+                <div className="flex items-center gap-x-2">
+                    <PeriodFilter />
+                    <RegerateTokenModal registryId={registry.id} />
+                </div>
             </div>
             <RegistryTotals data={registryTotals} />
             {Object.entries(page.props.analytics.analytics).map(
