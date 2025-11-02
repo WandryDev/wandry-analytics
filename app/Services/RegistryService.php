@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Data\RegistryData;
-use App\Models\Event;
 use App\Models\Registry;
 use Carbon\Carbon;
 
@@ -83,5 +82,18 @@ class RegistryService
             'totals' => $totals,
             'analytics' => $analytics,
         ];
+    }
+
+    public function updateToken(Registry $registry): string
+    {
+        $registry->token()->delete();
+
+        $token = auth()->user()->createToken('registry_'.$registry->id);
+
+        $accessToken = $token->accessToken;
+        $accessToken->registry_id = $registry->id;
+        $accessToken->save();
+
+        return $token->plainTextToken;
     }
 }

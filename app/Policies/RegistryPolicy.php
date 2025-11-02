@@ -10,7 +10,7 @@ class RegistryPolicy
 {
     use HandlesAuthorization;
 
-    public function read(User $user, Registry $registry): bool
+    public function action(User $user, Registry $registry): bool
     {
         if($registry->user->id !== $user->id) {
             return false;

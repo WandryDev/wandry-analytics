@@ -23,7 +23,7 @@ class RegistryController extends Controller
 
     public function show(Request $request, Registry $registry)
     {
-        $this->authorize('read', $registry);
+        $this->authorize('action', $registry);
 
         $analytics = $this->registryService->show($registry, $request->input('period', 'week'));
 
@@ -45,5 +45,14 @@ class RegistryController extends Controller
         $registryData = $this->registryService->store(RegistryData::from($data));
 
         return redirect()->route('registry.show', $registryData);
+    }
+
+    public function updateToken(Registry $registry)
+    {
+        $this->authorize('action', $registry);
+
+        return response()->json([
+            'token' => $this->registryService->updateToken($registry),
+        ]);
     }
 }
