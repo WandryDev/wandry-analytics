@@ -18,7 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('registry/create', [RegistryController::class, 'create'])->name('registry.create');
-    Route::get('registry/{id}', [RegistryController::class, 'show'])->name('registry.show');
+    Route::get('registry/{registry}', [RegistryController::class, 'show'])->name('registry.show');
     Route::post('registry', [RegistryController::class, 'store'])->name('registry.store');
 });
 
