@@ -27,8 +27,11 @@ class RegistryController extends Controller
 
         $analytics = $this->registryService->show($registry, $request->input('period', 'week'));
 
+        $token = $request->session()->get('token');
+
         return Inertia::render('registry/Show', [
             'registry' => $registry,
+            'token' => $token ?? null,
             'analytics' => $analytics, // тут может быть null если у регистри нету ивентов
         ]);
     }
@@ -44,7 +47,8 @@ class RegistryController extends Controller
 
         $registryData = $this->registryService->store(RegistryData::from($data));
 
-        return Inertia::render('registry/Show', $registryData);
+        return redirect()->route('registry.show', ['registry' => $registryData['registry']])
+            ->with('token', $registryData['token']);
     }
 
     public function updateToken(Registry $registry)
