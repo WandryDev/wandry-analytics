@@ -5,7 +5,7 @@ import { login } from '@/routes';
 
 export default function Pricing() {
     return (
-        <div className="relative py-16 md:py-32">
+        <div className="relative py-16 md:py-32" id="pricing">
             <div className="mx-auto max-w-5xl px-6">
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-3xl font-bold text-balance md:text-4xl lg:text-5xl">
