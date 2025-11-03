@@ -18,10 +18,9 @@ export default function Welcome() {
             </Head>
             <HeroSection />
             <Features />
-            <SeoBlock/>
-            <Pricing/>
-            <SubscribeToNews/>
-            <FooterSection/>
+            <SeoBlock />
+            <Pricing />
+            <FooterSection />
         </>
     );
 }
