@@ -20,31 +20,30 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
 }) => {
     const [loading, setLoading] = React.useState(false);
     const testSdk = async () => {
-        setLoading(true);
-        const registryJsonUrl = `${registry.url}/r/registry.json`;
-        const response = await fetch(registryJsonUrl, {
-            credentials: 'include',
-        });
+        window.location.reload();
+        // setLoading(true);
+        // const registryJsonUrl = `${registry.url}/r/registry.json`;
+        // const response = await fetch(registryJsonUrl, {});
 
-        if (response.ok) {
-            toast.info('Try to fetch registry.json succeeded!', {
-                description:
-                    'If you’re still seeing this setup guide, it means we weren’t able to collect the event.',
-            });
+        // if (response.ok) {
+        //     toast.info('Try to fetch registry.json succeeded!', {
+        //         description:
+        //             'If you’re still seeing this setup guide, it means we weren’t able to collect the event.',
+        //     });
 
-            setTimeout(() => {
-                window.location.reload();
-                setLoading(false);
-            }, 3000);
+        //     setTimeout(() => {
+        //         window.location.reload();
+        //         setLoading(false);
+        //     }, 3000);
 
-            return;
-        }
+        //     return;
+        // }
 
-        setLoading(false);
+        // setLoading(false);
 
-        return toast.error(
-            'If you’re still seeing this setup guide, it means we weren’t able to collect the event.',
-        );
+        // return toast.error(
+        //     'If you’re still seeing this setup guide, it means we weren’t able to collect the event.',
+        // );
     };
 
     return (
