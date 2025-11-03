@@ -3,7 +3,7 @@ import FooterSection from '@/components/footer';
 import HeroSection from '@/components/hero-section-one';
 import Pricing from '@/components/pricing';
 import SeoBlock from '@/components/seo-block';
-import SubscribeToNews from '@/components/subscibe-to-news';
+
 import { Head } from '@inertiajs/react';
 
 export default function Welcome() {

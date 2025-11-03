@@ -35,7 +35,7 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
             setTimeout(() => {
                 window.location.reload();
                 setLoading(false);
-            }, 5000);
+            }, 3000);
 
             return;
         }
