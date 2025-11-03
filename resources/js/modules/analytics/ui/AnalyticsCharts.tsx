@@ -1,6 +1,15 @@
 'use client';
 
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+import { useCallback, useEffect, useState } from 'react';
+import {
+    eachDayOfInterval,
+    eachHourOfInterval,
+    endOfDay,
+    format,
+    startOfDay,
+    subDays,
+} from 'date-fns';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
@@ -12,7 +21,7 @@ import {
 
 import { AnalyticData, Totals } from '@/modules/analytics/model/analytics';
 import { RegistryTotals } from '@/modules/analytics/ui/RegistryTotals';
-import { useCallback, useEffect, useState } from 'react';
+import { kebabeToPascal } from '@/lib/component';
 
 const chartConfig = {
     desktop: {
@@ -42,11 +51,60 @@ export function AnalyticsCharts({
         searchParams.get('period') || 'week',
     );
 
+    const prepareDate = useCallback(() => {
+        if (timeRange === 'week') {
+            const interval = eachDayOfInterval({
+                start: new Date(subDays(new Date(), 7)),
+                end: new Date(),
+            });
+
+            return interval.map((date) => {
+                const dateString = format(date, 'yyyy-MM-dd');
+
+                const found = data.find((d) => d.date === dateString);
+
+                return found ?? { date: dateString, total: 0 };
+            });
+        }
+
+        if (timeRange === 'month') {
+            const interval = eachDayOfInterval({
+                start: new Date(subDays(new Date(), 30)),
+                end: new Date(),
+            });
+
+            return interval.map((date) => {
+                const dateString = format(date, 'yyyy-MM-dd');
+
+                const found = data.find((d) => d.date === dateString);
+
+                return found ?? { date: dateString, total: 0 };
+            });
+        }
+
+        if (timeRange === 'day') {
+            const interval = eachHourOfInterval({
+                start: new Date(startOfDay(new Date())),
+                end: new Date(endOfDay(new Date())),
+            });
+
+            return interval.map((date) => {
+                const dateString = format(date, 'yyyy-MM-dd HH:00');
+
+                const found = data.find(
+                    (d) =>
+                        format(new Date(d.date), 'yyyy-MM-dd HH:00') ===
+                        dateString,
+                );
+
+                return found ?? { date: dateString, total: 0 };
+            });
+        }
+    }, [timeRange, data]);
+
     const xFormatter = useCallback(
         (value: string) => {
             const date = new Date(value);
-
-            console.log(timeRange);
 
             if (timeRange === 'day') {
                 return date.toLocaleTimeString('en-US', {
@@ -71,7 +129,11 @@ export function AnalyticsCharts({
     return (
         <Card className="border-0 px-0 shadow-none">
             <CardHeader className="px-0">
-                {/* <RegistryTotals data={totals} title={component} /> */}
+                <RegistryTotals
+                    data={totals}
+                    title={kebabeToPascal(component)}
+                    hasCards={false}
+                />
             </CardHeader>
             <CardContent className="px-0">
                 <ChartContainer
@@ -80,7 +142,7 @@ export function AnalyticsCharts({
                 >
                     <AreaChart
                         accessibilityLayer
-                        data={data}
+                        data={prepareDate()}
                         margin={{
                             left: 12,
                             right: 12,

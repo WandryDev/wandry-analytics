@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { usePage } from '@inertiajs/react';
 import NumberFlow, { continuous } from '@number-flow/react';
 
 import {
@@ -14,10 +13,12 @@ import { Totals } from '../model/analytics';
 type RegistryTotalsProps = {
     data: Totals;
     title?: string;
+    hasCards?: boolean;
 };
 
 export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
     data,
+    hasCards = true,
     title = 'Total registry installations',
 }) => {
     const [totals, setTotals] = useState<Totals>({
@@ -27,7 +28,6 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
     });
 
     useEffect(() => {
-        console.log('data', data);
         setTotals(data);
     }, [data]);
 
@@ -36,50 +36,52 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
             <CardHeader className="flex-row items-center justify-between px-0">
                 <CardTitle className="mt-6 mb-3 text-xl">{title}</CardTitle>
             </CardHeader>
-            <CardDescription className="mt-0 flex">
-                <Card className="w-full rounded-md rounded-r-none py-4 shadow-none">
-                    <CardContent>
-                        <CardDescription className="mb-2">
-                            Total installs
-                        </CardDescription>
-                        <CardTitle className="text-3xl font-semibold text-foreground">
-                            <NumberFlow
-                                willChange
-                                plugins={[continuous]}
-                                value={totals.day}
-                            />
-                        </CardTitle>
-                    </CardContent>
-                </Card>
-                <Card className="w-full rounded-none py-4 shadow-none">
-                    <CardContent>
-                        <CardDescription className="mb-2">
-                            Weekly installs
-                        </CardDescription>
-                        <CardTitle className="text-3xl font-semibold text-foreground">
-                            <NumberFlow
-                                willChange
-                                plugins={[continuous]}
-                                value={totals.week}
-                            />
-                        </CardTitle>
-                    </CardContent>
-                </Card>
-                <Card className="w-full rounded-md rounded-l-none border-x-0 py-4 shadow-none">
-                    <CardContent>
-                        <CardDescription className="mb-2">
-                            Monthly installs
-                        </CardDescription>
-                        <CardTitle className="text-3xl font-semibold text-foreground">
-                            <NumberFlow
-                                willChange
-                                plugins={[continuous]}
-                                value={totals.month}
-                            />
-                        </CardTitle>
-                    </CardContent>
-                </Card>
-            </CardDescription>
+            {hasCards && (
+                <CardDescription className="mt-0 flex">
+                    <Card className="w-full rounded-md rounded-r-none py-4 shadow-none">
+                        <CardContent>
+                            <CardDescription className="mb-2">
+                                Total installs
+                            </CardDescription>
+                            <CardTitle className="text-3xl font-semibold text-foreground">
+                                <NumberFlow
+                                    willChange
+                                    plugins={[continuous]}
+                                    value={totals.day}
+                                />
+                            </CardTitle>
+                        </CardContent>
+                    </Card>
+                    <Card className="w-full rounded-none py-4 shadow-none">
+                        <CardContent>
+                            <CardDescription className="mb-2">
+                                Weekly installs
+                            </CardDescription>
+                            <CardTitle className="text-3xl font-semibold text-foreground">
+                                <NumberFlow
+                                    willChange
+                                    plugins={[continuous]}
+                                    value={totals.week}
+                                />
+                            </CardTitle>
+                        </CardContent>
+                    </Card>
+                    <Card className="w-full rounded-md rounded-l-none border-x-0 py-4 shadow-none">
+                        <CardContent>
+                            <CardDescription className="mb-2">
+                                Monthly installs
+                            </CardDescription>
+                            <CardTitle className="text-3xl font-semibold text-foreground">
+                                <NumberFlow
+                                    willChange
+                                    plugins={[continuous]}
+                                    value={totals.month}
+                                />
+                            </CardTitle>
+                        </CardContent>
+                    </Card>
+                </CardDescription>
+            )}
         </>
     );
 };
