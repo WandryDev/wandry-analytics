@@ -22,6 +22,7 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
     title = 'Total registry installations',
 }) => {
     const [totals, setTotals] = useState<Totals>({
+        total: 0,
         day: 0,
         week: 0,
         month: 0,
@@ -34,14 +35,17 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
     return (
         <>
             <CardHeader className="flex-row items-center justify-between px-0">
-                <CardTitle className="mt-6 mb-3 text-xl">{title}</CardTitle>
+                <CardTitle className="mt-6 mb-3 flex items-center gap-x-2">
+                    {title}
+                    <p>{totals.total}</p>
+                </CardTitle>
             </CardHeader>
             {hasCards && (
                 <CardDescription className="mt-0 flex">
                     <Card className="w-full rounded-md rounded-r-none py-4 shadow-none">
                         <CardContent>
                             <CardDescription className="mb-2">
-                                Total installs
+                                Daily installs
                             </CardDescription>
                             <CardTitle className="text-3xl font-semibold text-foreground">
                                 {/* <NumberFlow

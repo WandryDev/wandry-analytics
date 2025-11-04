@@ -1,4 +1,5 @@
 export type Totals = {
+    total: number;
     day: number;
     week: number;
     month: number;

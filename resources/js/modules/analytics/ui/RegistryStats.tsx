@@ -20,6 +20,7 @@ export const RegistryStats: React.FC = () => {
     const page = usePage<SharedData & RegistryAnalyticsProps>();
     const registry = page.props.registry;
     const registryTotals = page.props.analytics?.totals ?? {
+        total: 0,
         days: 0,
         views: 0,
         visitors: 0,
