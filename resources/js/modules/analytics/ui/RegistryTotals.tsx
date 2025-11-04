@@ -37,7 +37,7 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
             <CardHeader className="flex-row items-center justify-between px-0">
                 <CardTitle className="mt-6 mb-3 flex items-center gap-x-2">
                     {title}
-                    <p>{totals.total}</p>
+                    <p>{hasCards && totals.total}</p>
                 </CardTitle>
             </CardHeader>
             {hasCards && (

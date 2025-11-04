@@ -9,6 +9,7 @@ import {
     format,
     startOfDay,
     subDays,
+    subHours,
 } from 'date-fns';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -84,7 +85,7 @@ export function AnalyticsCharts({
 
         if (timeRange === 'day') {
             const interval = eachHourOfInterval({
-                start: new Date(startOfDay(new Date())),
+                start: new Date(subHours(new Date(), 24)),
                 end: new Date(endOfDay(new Date())),
             });
 
