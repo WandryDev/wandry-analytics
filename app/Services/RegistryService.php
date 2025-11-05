@@ -78,9 +78,12 @@ class RegistryService
             return collect($events->toArray());
         })->groupBy('component')->toArray();
 
+        $countryAnalytics = $this->getCountryAnalytics($registry, $period);
+
         return [
             'totals' => $totals,
             'analytics' => $analytics,
+            'countryAnalytics' => $countryAnalytics,
         ];
     }
 
@@ -95,5 +98,14 @@ class RegistryService
         $accessToken->save();
 
         return $token->plainTextToken;
+    }
+
+    private function getCountryAnalytics(Registry $registry, string $period = 'week'): array
+    {
+        $events = $registry->events()
+            ->where('created_at', '>=',Carbon::now()->subDays(7))
+            ->get();
+
+        return $events->countBy('country')->toArray();
     }
 }
