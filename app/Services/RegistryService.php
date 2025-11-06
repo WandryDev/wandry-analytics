@@ -115,6 +115,6 @@ class RegistryService
             return ['country' => $country, 'eventsCount' => $eventsCount, 'code' => $countries[$country] ?? null];
         });
 
-        return $countryAnalytics->values();
+        return $countryAnalytics->values()->toArray();
     }
 }
