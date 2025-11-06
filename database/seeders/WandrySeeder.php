@@ -26,20 +26,26 @@ class WandrySeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
-        $registry = Registry::create([
-            'user_id' => $user->id,
-            'url' => 'https://ui.wandry.com.ua',
-            'name' => 'wandry-ui'
-        ]);
+        $registry = Registry::firstOrCreate(
+            [
+                'name' => 'wandry-ui',
+                'user_id' => $user->id
+            ], [
+                'user_id' => $user->id,
+                'url' => 'https://ui.wandry.com.ua',
+                'name' => 'wandry-ui'
+            ]);
 
         foreach ($componentsNames as $componentName) {
-            for($i = 0; $i <= 7; $i++) {
-                for ($j = 0; $j <= 24; $j++) {
-                    Event::factory()->count(rand(5,40))->create([
-                        'eventable_id' => $registry->id,
-                        'component' => $componentName,
-                        'created_at' => Carbon::now()->endOfDay()->subDays($i)->subHours($j)
-                    ]);
+            for ($i = 0; $i <= 7; $i++) {
+                if (!Event::where('eventable_id', $registry->id)->whereDate('created_at', Carbon::now()->endOfDay()->subDays($i))->exists()) {
+                    for ($j = 0; $j <= 24; $j++) {
+                        Event::factory()->count(rand(5, 40))->create([
+                            'eventable_id' => $registry->id,
+                            'component' => $componentName,
+                            'created_at' => Carbon::now()->endOfDay()->subDays($i)->subHours($j)
+                        ]);
+                    }
                 }
             }
         }
