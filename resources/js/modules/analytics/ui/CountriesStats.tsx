@@ -1,9 +1,15 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { StatsCard } from '@/components/stats-card';
+import { CountriesAnalytics } from '../model/analytics';
 
 type CountriesStatsProps = {
-    countries: Record<string, number>;
+    countries: CountriesAnalytics[];
+};
+
+const normalizeCountryName = (name: string) => {
+    if (!name?.length) return 'Unknown';
+
+    return name;
 };
 
 export const CountriesStats: React.FC<CountriesStatsProps> = ({
@@ -12,20 +18,21 @@ export const CountriesStats: React.FC<CountriesStatsProps> = ({
     return (
         <StatsCard title="Countries">
             <div className="flex flex-col">
-                {Object.entries(countries)
-                    .filter(([country]) => Boolean(country))
-                    .map(([country, count]) => (
-                        <div
-                            key={country}
-                            className="flex justify-between py-1"
-                        >
-                            <div className="flex items-center gap-x-2">
-                                <img src="https://flag.vercel.app/s/UA.svg" />
-                                <span>{country}</span>
-                            </div>
-                            <span className="font-bold">{count}</span>
+                {countries.map(({ country, code, eventsCount }) => (
+                    <div key={country} className="flex justify-between py-1">
+                        <div className="flex items-center gap-x-2">
+                            {code && (
+                                <img
+                                    src={`https://flag.vercel.app/s/${code}.svg`}
+                                />
+                            )}
+                            <span className="font-medium">
+                                {normalizeCountryName(country)}
+                            </span>
                         </div>
-                    ))}
+                        <span className="font-bold">{eventsCount}</span>
+                    </div>
+                ))}
             </div>
         </StatsCard>
     );

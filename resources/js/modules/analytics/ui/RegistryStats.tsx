@@ -1,7 +1,11 @@
 import React from 'react';
 import { usePage } from '@inertiajs/react';
 
-import { RegistryAnalytics, Totals } from '../model/analytics';
+import {
+    CountriesAnalytics,
+    RegistryAnalytics,
+    Totals,
+} from '../model/analytics';
 import { SharedData } from '@/types';
 import { PeriodFilter } from './PeriodFilter';
 import { RegistryTotals } from './RegistryTotals';
@@ -15,7 +19,7 @@ type RegistryAnalyticsProps = {
     analytics: {
         totals: Totals;
         analytics: RegistryAnalytics;
-        countryAnalytics: Record<string, number>;
+        countryAnalytics: CountriesAnalytics[];
     };
 };
 
