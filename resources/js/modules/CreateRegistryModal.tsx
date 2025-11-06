@@ -33,7 +33,7 @@ export function CreateRegistryModal({
             <DialogTrigger asChild>
                 <Button
                     className="cursor-pointer"
-                    size={!sidebarOpened ? 'icon' : 'default'}
+                    size={insideSidebar && !sidebarOpened ? 'icon' : 'default'}
                 >
                     <PlusIcon />
                     {!insideSidebar || sidebarOpened

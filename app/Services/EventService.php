@@ -26,7 +26,8 @@ class EventService
         }
         $registry = Registry::find($tokenModel->registry_id);
 
-        $data->ip = request()->ip() ?? '';
+        // $data->ip = request()->ip() ?? '';
+        $data->ip = '79.142.197.150';
 
         $event = DB::transaction(function () use ($data) {
             $event = Event::where('ip', $data->ip)

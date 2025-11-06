@@ -7,12 +7,15 @@ import { PeriodFilter } from './PeriodFilter';
 import { RegistryTotals } from './RegistryTotals';
 import { AnalyticsCharts } from './AnalyticsCharts';
 import { RegerateTokenModal } from './RegerateTokenModal';
+import { CountriesStats } from './CountriesStats';
+import { ComponentsStats } from './ComponentsStats';
 
 type RegistryAnalyticsProps = {
     registry: any;
     analytics: {
         totals: Totals;
         analytics: RegistryAnalytics;
+        countryAnalytics: Record<string, number>;
     };
 };
 
@@ -26,6 +29,8 @@ export const RegistryStats: React.FC = () => {
         visitors: 0,
     };
 
+    const countryAnalytics = page.props.analytics.countryAnalytics;
+
     return (
         <div className="space-y-4 px-6 py-10">
             <div className="flex items-center justify-between">
@@ -36,6 +41,10 @@ export const RegistryStats: React.FC = () => {
                 </div>
             </div>
             <RegistryTotals data={registryTotals} />
+            <div className="mt-4 grid grid-cols-2 gap-x-4">
+                <CountriesStats countries={countryAnalytics} />
+                <ComponentsStats />
+            </div>
             {page.props.analytics &&
                 Object.entries(page.props.analytics?.analytics).map(
                     ([component, data]) => (
