@@ -114,7 +114,7 @@ class RegistryService
         $countries = $events->pluck('country_code', 'country')->toArray();
         $countries = array_unique($countries);
 
-        $groupByCountries = $events->countBy('country');
+        $groupByCountries = $events->countBy('country')->sortDesc();
 
         $countryAnalytics = $groupByCountries->map(function ($eventsCount, $country) use ($countries) {
             return ['country' => $country, 'eventsCount' => $eventsCount, 'code' => $countries[$country] ?? null];
