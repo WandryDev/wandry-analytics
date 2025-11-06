@@ -19,6 +19,9 @@ class EventFactory extends Factory
             'type' => 'install',
             'component' => $this->faker->word,
             'ip' => $this->faker->ipv4,
+            'country' => $this->faker->country,
+            'city' => $this->faker->city,
+            'country_code' => $this->faker->countryCode,
             'created_at' => $this->faker->dateTimeBetween('-3 months', 'now'),
         ];
     }

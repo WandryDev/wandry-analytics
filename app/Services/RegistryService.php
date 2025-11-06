@@ -106,6 +106,15 @@ class RegistryService
             ->where('created_at', '>=',Carbon::now()->subDays(7))
             ->get();
 
-        return $events->countBy('country')->toArray();
+        $countries = $events->pluck('country_code', 'country')->toArray();
+        $countries = array_unique($countries);
+
+        $groupByCountries = $events->countBy('country');
+
+        $countryAnalytics = $groupByCountries->map(function ($eventsCount, $country) use ($countries) {
+            return ['country' => $country, 'eventsCount' => $eventsCount, 'code' => $countries[$country] ?? null];
+        });
+
+        return $countryAnalytics->values();
     }
 }
