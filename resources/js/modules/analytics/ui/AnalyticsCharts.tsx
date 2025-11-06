@@ -127,7 +127,7 @@ export function AnalyticsCharts({
                             dataKey="total"
                             type="linear"
                             fill="var(--color-mobile)"
-                            fillOpacity={0.2}
+                            fillOpacity={0.15}
                             stroke="var(--color-mobile)"
                             stackId="a"
                         />

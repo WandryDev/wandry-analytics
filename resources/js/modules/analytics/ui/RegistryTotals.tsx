@@ -70,7 +70,7 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
                             </CardTitle>
                         </CardContent>
                     </Card>
-                    <Card className="w-full rounded-md rounded-l-none border-x-0 py-4 shadow-none">
+                    <Card className="w-full rounded-md rounded-l-none border-l-0 py-4 shadow-none">
                         <CardContent>
                             <CardDescription className="mb-2">
                                 Monthly installs
