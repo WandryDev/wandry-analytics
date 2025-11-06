@@ -41,7 +41,7 @@ export function CreateRegistryModal({
                         : ''}
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px]" tabIndex={-1}>
                 <DialogHeader>
                     <DialogTitle>Create a new registry</DialogTitle>
                     <DialogDescription>
@@ -55,12 +55,14 @@ export function CreateRegistryModal({
                     resetOnSuccess
                 >
                     <TextField
+                        tabIndex={1}
                         name="name"
                         label="Registry name"
                         placeholder="@wandry-ui"
                         description="The name can be arbitrary — it will be displayed in the menu."
                     />
                     <TextField
+                        tabIndex={2}
                         name="url"
                         label="Registry URL"
                         placeholder="https://wandry-ui.com"
@@ -71,7 +73,7 @@ export function CreateRegistryModal({
                                 Cancel
                             </Button>
                         </DialogClose>
-                        <SubmitButton form="registry_create">
+                        <SubmitButton form="registry_create" tabIndex={3}>
                             Create
                         </SubmitButton>
                     </DialogFooter>

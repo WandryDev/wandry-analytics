@@ -48,12 +48,11 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
                                 Daily installs
                             </CardDescription>
                             <CardTitle className="text-3xl font-semibold text-foreground">
-                                {/* <NumberFlow
+                                <NumberFlow
                                     willChange
                                     plugins={[continuous]}
-                                    value={totals.day}
-                                /> */}
-                                {totals.day ?? 0}
+                                    value={totals.day ?? 0}
+                                />
                             </CardTitle>
                         </CardContent>
                     </Card>
@@ -63,12 +62,11 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
                                 Weekly installs
                             </CardDescription>
                             <CardTitle className="text-3xl font-semibold text-foreground">
-                                {/* <NumberFlow
+                                <NumberFlow
                                     willChange
                                     plugins={[continuous]}
-                                    value={totals.week}
-                                /> */}
-                                {totals.week ?? 0}
+                                    value={totals.week ?? 0}
+                                />
                             </CardTitle>
                         </CardContent>
                     </Card>
@@ -78,12 +76,11 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
                                 Monthly installs
                             </CardDescription>
                             <CardTitle className="text-3xl font-semibold text-foreground">
-                                {/* <NumberFlow
+                                <NumberFlow
                                     willChange
                                     plugins={[continuous]}
-                                    value={totals.month}
-                                /> */}
-                                {totals.month ?? 0}
+                                    value={totals.month ?? 0}
+                                />
                             </CardTitle>
                         </CardContent>
                     </Card>
