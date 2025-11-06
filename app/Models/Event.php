@@ -15,6 +15,9 @@ class Event extends Model
         'component',
         'ip',
         'created_at',
+        'country',
+        'country_code',
+        'city',
     ];
 
     public $timestamps = false;

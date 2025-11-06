@@ -1,16 +1,7 @@
 'use client';
 
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { useCallback, useEffect, useState } from 'react';
-import {
-    eachDayOfInterval,
-    eachHourOfInterval,
-    endOfDay,
-    format,
-    startOfDay,
-    subDays,
-    subHours,
-} from 'date-fns';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
@@ -23,6 +14,12 @@ import {
 import { AnalyticData, Totals } from '@/modules/analytics/model/analytics';
 import { RegistryTotals } from '@/modules/analytics/ui/RegistryTotals';
 import { kebabeToPascal } from '@/lib/component';
+import {
+    fillDailyData,
+    fillMonthlyData,
+    fillWeeklyData,
+    xFormatter,
+} from '@/lib/analytics';
 
 const chartConfig = {
     desktop: {
@@ -54,72 +51,20 @@ export function AnalyticsCharts({
 
     const prepareDate = useCallback(() => {
         if (timeRange === 'week') {
-            const interval = eachDayOfInterval({
-                start: new Date(subDays(new Date(), 7)),
-                end: new Date(),
-            });
-
-            return interval.map((date) => {
-                const dateString = format(date, 'yyyy-MM-dd');
-
-                const found = data.find((d) => d.date === dateString);
-
-                return found ?? { date: dateString, total: 0 };
-            });
+            return fillWeeklyData(data);
         }
 
         if (timeRange === 'month') {
-            const interval = eachDayOfInterval({
-                start: new Date(subDays(new Date(), 30)),
-                end: new Date(),
-            });
-
-            return interval.map((date) => {
-                const dateString = format(date, 'yyyy-MM-dd');
-
-                const found = data.find((d) => d.date === dateString);
-
-                return found ?? { date: dateString, total: 0 };
-            });
+            return fillMonthlyData(data);
         }
 
         if (timeRange === 'day') {
-            const interval = eachHourOfInterval({
-                start: new Date(subHours(new Date(), 24)),
-                end: new Date(endOfDay(new Date())),
-            });
-
-            return interval.map((date) => {
-                const dateString = format(date, 'yyyy-MM-dd HH:00');
-
-                const found = data.find(
-                    (d) =>
-                        format(new Date(d.date), 'yyyy-MM-dd HH:00') ===
-                        dateString,
-                );
-
-                return found ?? { date: dateString, total: 0 };
-            });
+            return fillDailyData(data);
         }
     }, [timeRange, data]);
 
-    const xFormatter = useCallback(
-        (value: string) => {
-            const date = new Date(value);
-
-            if (timeRange === 'day') {
-                return date.toLocaleTimeString('en-US', {
-                    hour12: false,
-                    hour: '2-digit',
-                    minute: '2-digit',
-                });
-            }
-
-            return date.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-            });
-        },
+    const xFormatterFn = useCallback(
+        (value: string) => xFormatter(value, timeRange),
         [timeRange],
     );
 
@@ -138,34 +83,51 @@ export function AnalyticsCharts({
             </CardHeader>
             <CardContent className="px-0">
                 <ChartContainer
-                    className="max-h-[55vh] w-full"
+                    className="max-h-[40vh] w-full"
                     config={chartConfig}
                 >
                     <AreaChart
                         accessibilityLayer
                         data={prepareDate()}
                         margin={{
-                            left: 12,
-                            right: 12,
+                            top: 20,
+                            left: 0,
+                            right: 20,
                         }}
                     >
                         <CartesianGrid vertical={false} />
+                        <YAxis
+                            domain={[
+                                0,
+                                (dataMax: any) => Math.ceil(dataMax * 1.1),
+                            ]}
+                            allowDecimals={false}
+                            axisLine={false} // убрать вертикальную ось
+                            tickLine={false} // убрать маленькие черточки
+                            tick={{ fill: '#9ca3af', fontSize: 12 }} // приглушённый цвет (серый)
+                            width={30}
+                        />
                         <XAxis
+                            interval={3}
                             dataKey="date"
                             tickLine={false}
                             axisLine={false}
                             tickMargin={8}
-                            tickFormatter={xFormatter}
+                            tickFormatter={xFormatterFn}
                         />
                         <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent indicator="line" />}
+                            cursor={{
+                                strokeDasharray: '10 10',
+                                stroke: '#8884d8',
+                            }}
+                            content={<ChartTooltipContent indicator="dot" />}
                         />
                         <Area
+                            // isAnimationActive={false}
                             dataKey="total"
                             type="linear"
                             fill="var(--color-mobile)"
-                            fillOpacity={0.4}
+                            fillOpacity={0.15}
                             stroke="var(--color-mobile)"
                             stackId="a"
                         />
