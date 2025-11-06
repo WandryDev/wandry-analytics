@@ -21,10 +21,13 @@ export const CountriesStats: React.FC<CountriesStatsProps> = ({
                 {countries.map(({ country, code, eventsCount }) => (
                     <div key={country} className="flex justify-between py-1">
                         <div className="flex items-center gap-x-2">
-                            {code && (
+                            {code ? (
                                 <img
+                                    className="w-5"
                                     src={`https://flag.vercel.app/s/${code}.svg`}
                                 />
+                            ) : (
+                                <div className="w-5" />
                             )}
                             <span className="font-medium">
                                 {normalizeCountryName(country)}
