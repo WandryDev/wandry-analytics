@@ -2,6 +2,7 @@ import React from 'react';
 import { usePage } from '@inertiajs/react';
 
 import {
+    ComponentsAnalytics,
     CountriesAnalytics,
     RegistryAnalytics,
     Totals,
@@ -20,6 +21,7 @@ type RegistryAnalyticsProps = {
         totals: Totals;
         analytics: RegistryAnalytics;
         countryAnalytics: CountriesAnalytics[];
+        componentsAnalytics: ComponentsAnalytics;
     };
 };
 
@@ -34,6 +36,7 @@ export const RegistryStats: React.FC = () => {
     };
 
     const countryAnalytics = page.props.analytics.countryAnalytics;
+    const componentsAnalytics = page.props.analytics.componentsAnalytics;
 
     return (
         <div className="space-y-4 px-6 py-10">
@@ -47,7 +50,7 @@ export const RegistryStats: React.FC = () => {
             <RegistryTotals data={registryTotals} />
             <div className="mt-4 grid grid-cols-2 gap-x-4">
                 <CountriesStats countries={countryAnalytics} />
-                <ComponentsStats />
+                <ComponentsStats components={componentsAnalytics} />
             </div>
             {page.props.analytics &&
                 Object.entries(page.props.analytics?.analytics).map(

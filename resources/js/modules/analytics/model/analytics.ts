@@ -17,4 +17,6 @@ export type CountriesAnalytics = {
     code: string;
 };
 
+export type ComponentsAnalytics = Record<string, number>;
+
 export type RegistryAnalytics = Record<string, AnalyticData[]>;

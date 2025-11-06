@@ -1,13 +1,25 @@
 import React from 'react';
 import { StatsCard } from '@/components/stats-card';
-import { Clock2 } from 'lucide-react';
+import { kebabeToPascal } from '@/lib/component';
 
-export const ComponentsStats: React.FC = () => {
+type ComponentsStatsProps = {
+    components?: Record<string, number>;
+};
+
+export const ComponentsStats: React.FC<ComponentsStatsProps> = ({
+    components,
+}) => {
     return (
         <StatsCard title="Components">
-            <div className="flex h-full flex-1 flex-col items-center justify-center">
-                <Clock2 className="opacity-30" />
-                <span className="text-sm font-medium opacity-30">Soon</span>
+            <div className="flex flex-col">
+                {Object.entries(components || {}).map(([component, count]) => (
+                    <div key={component} className="flex justify-between py-1">
+                        <span className="font-medium">
+                            {kebabeToPascal(component)}
+                        </span>
+                        <span className="font-bold">{count}</span>
+                    </div>
+                ))}
             </div>
         </StatsCard>
     );
