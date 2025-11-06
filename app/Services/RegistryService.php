@@ -76,13 +76,18 @@ class RegistryService
 
         $analytics = $rawEvents->map(function ($events) use ($startOfMonth) {
             return collect($events->toArray());
-        })->groupBy('component')->toArray();
+        })->groupBy('component');
+
+        $componentsAnalytics = $analytics->map(function ($events) {
+            return $events->sum('total');
+        });
 
         $countryAnalytics = $this->getCountryAnalytics($registry, $period);
 
         return [
             'totals' => $totals,
-            'analytics' => $analytics,
+            'analytics' => $analytics->toArray(),
+            'componentsAnalytics' => $componentsAnalytics->sortDesc()->toArray(),
             'countryAnalytics' => $countryAnalytics,
         ];
     }
@@ -116,5 +121,10 @@ class RegistryService
         });
 
         return $countryAnalytics->values()->toArray();
+    }
+
+    private function getComponentsAnalytics(Registry $registry, string $period = 'week'): array
+    {
+
     }
 }
