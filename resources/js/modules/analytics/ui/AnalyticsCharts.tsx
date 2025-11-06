@@ -123,7 +123,7 @@ export function AnalyticsCharts({
                             content={<ChartTooltipContent indicator="dot" />}
                         />
                         <Area
-                            isAnimationActive={false}
+                            // isAnimationActive={false}
                             dataKey="total"
                             type="linear"
                             fill="var(--color-mobile)"
