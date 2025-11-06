@@ -19,23 +19,21 @@ class DetermineCountries extends Command
         $events = Event::whereNull('country')->where('eventable_id', '!=', 12)->limit(40)->get();
 
         foreach ($events as $event) {
-            $response = Http::get('http://demo.ip-api.com/json/'.$event->ip);
+            $response = Http::get('http://demo.ip-api.com/json/' . $event->ip);
 
-            if($response->successful()) {
-                try {
-                    $data = $response->json();
+            $data = $response->json();
 
-                    $event->country = $data['country'];
-                    $event->country_code = $data['countryCode'];
-                    $event->city = $data['city'];
-                    $event->save();
-                } catch (\Exception $e) {
-                    Log::error($e->getMessage());
-                    Log::error($response->json());
-                }
+            if ($data['status'] === 'success') {
+                $event->country = $data['country'];
+                $event->country_code = $data['countryCode'];
+                $event->city = $data['city'];
             } else {
+                $event->country = 'unknown';
+                $event->country_code = 'unknown';
+                $event->city = 'unknown';
                 Log::error($response->json());
             }
+            $event->save();
         }
     }
 }

@@ -1,18 +1,42 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { StatsCard } from '@/components/stats-card';
+import { CountriesAnalytics } from '../model/analytics';
 
-export const CountriesStats: React.FC = () => {
+type CountriesStatsProps = {
+    countries: CountriesAnalytics[];
+};
+
+const normalizeCountryName = (name: string) => {
+    if (!name?.length) return 'Unknown';
+
+    return name;
+};
+
+export const CountriesStats: React.FC<CountriesStatsProps> = ({
+    countries,
+}) => {
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Countries</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div className="flex flex-col">
-                    <div className=""></div>
-                    <p></p>
-                </div>
-            </CardContent>
-        </Card>
+        <StatsCard title="Countries">
+            <div className="flex flex-col">
+                {countries.map(({ country, code, eventsCount }) => (
+                    <div key={country} className="flex justify-between py-1">
+                        <div className="flex items-center gap-x-2">
+                            {code ? (
+                                <img
+                                    className="w-5"
+                                    src={`https://flag.vercel.app/s/${code}.svg`}
+                                />
+                            ) : (
+                                <div className="w-5" />
+                            )}
+                            <span className="font-medium">
+                                {normalizeCountryName(country)}
+                            </span>
+                        </div>
+                        <span className="font-bold">{eventsCount}</span>
+                    </div>
+                ))}
+            </div>
+        </StatsCard>
     );
 };

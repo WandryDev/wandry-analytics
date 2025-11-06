@@ -76,13 +76,18 @@ class RegistryService
 
         $analytics = $rawEvents->map(function ($events) use ($startOfMonth) {
             return collect($events->toArray());
-        })->groupBy('component')->toArray();
+        })->groupBy('component');
+
+        $componentsAnalytics = $analytics->map(function ($events) {
+            return $events->sum('total');
+        });
 
         $countryAnalytics = $this->getCountryAnalytics($registry, $period);
 
         return [
             'totals' => $totals,
-            'analytics' => $analytics,
+            'analytics' => $analytics->toArray(),
+            'componentsAnalytics' => $componentsAnalytics->sortDesc()->toArray(),
             'countryAnalytics' => $countryAnalytics,
         ];
     }
@@ -106,6 +111,15 @@ class RegistryService
             ->where('created_at', '>=',Carbon::now()->subDays(7))
             ->get();
 
-        return $events->countBy('country')->toArray();
+        $countries = $events->pluck('country_code', 'country')->toArray();
+        $countries = array_unique($countries);
+
+        $groupByCountries = $events->countBy('country')->sortDesc();
+
+        $countryAnalytics = $groupByCountries->map(function ($eventsCount, $country) use ($countries) {
+            return ['country' => $country, 'eventsCount' => $eventsCount, 'code' => $countries[$country] ?? null];
+        });
+
+        return $countryAnalytics->values()->toArray();
     }
 }

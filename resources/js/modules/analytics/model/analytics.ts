@@ -11,4 +11,12 @@ export type AnalyticData = {
     total: number;
 };
 
+export type CountriesAnalytics = {
+    country: string;
+    eventsCount: number;
+    code: string;
+};
+
+export type ComponentsAnalytics = Record<string, number>;
+
 export type RegistryAnalytics = Record<string, AnalyticData[]>;
