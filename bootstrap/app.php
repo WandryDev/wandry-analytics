@@ -33,5 +33,5 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withSchedule(function (Illuminate\Console\Scheduling\Schedule $schedule) {
-        // $schedule->command('app:determine-countries')->everyMinute();
+        $schedule->command('app:determine-countries')->everyMinute();
     })->create();
