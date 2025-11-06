@@ -26,7 +26,7 @@ class EventService
         }
         $registry = Registry::find($tokenModel->registry_id);
 
-        $data->ip = request()->ip() ?? '';
+        $data->ip = request()->header('X-Forwarded-For') ?? request()->ip();
 
         $event = DB::transaction(function () use ($data) {
             $event = Event::where('ip', $data->ip)
