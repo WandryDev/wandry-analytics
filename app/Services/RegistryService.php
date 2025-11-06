@@ -122,9 +122,4 @@ class RegistryService
 
         return $countryAnalytics->values()->toArray();
     }
-
-    private function getComponentsAnalytics(Registry $registry, string $period = 'week'): array
-    {
-
-    }
 }
