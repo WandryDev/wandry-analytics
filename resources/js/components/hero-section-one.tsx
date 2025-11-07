@@ -10,6 +10,7 @@ import AppLogo from '@/components/app-logo';
 import HeroImage from '@/assets/images/hero.png';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { HeroDemo } from './hero-demo';
 
 const menuItems = [
     { name: 'Features', href: '#feature' },
@@ -133,18 +134,21 @@ export default function HeroSection() {
                                 trending and why.
                             </p>
 
-                            <Button asChild size="lg">
-                                <Link href={register()}>
-                                    <span className="btn-label">
-                                        Start analytics for free
-                                    </span>
-                                </Link>
-                            </Button>
+                            <div className="flex items-center justify-center gap-x-2 pt-6">
+                                <Button asChild size="lg">
+                                    <Link href={register()}>
+                                        <span className="btn-label">
+                                            Start analytics for free
+                                        </span>
+                                    </Link>
+                                </Button>
+                                <HeroDemo />
+                            </div>
                         </div>
                     </div>
 
                     <div className="mx-auto 2xl:max-w-7xl">
-                        <div className="pl-8 perspective-distant lg:pl-44">
+                        <div className="perspective-distant">
                             <div className="rotate-x-20 skew-x-12 mask-r-from-75% mask-b-from-55% mask-b-to-100% pt-6 pl-6 lg:h-176">
                                 {/* <img
                                     className="rounded-(--radius) border shadow-xl dark:hidden"
