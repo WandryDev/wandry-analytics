@@ -11,6 +11,7 @@ class EventRequest extends FormRequest
         return [
             'type' => 'required|string',
             'component' => 'required|string',
+            'ip' => 'nullable|string',
             'entity' => 'nullable|string', //Это тип на случай если в будущем будем хендлить еще что-то кроме registry
         ];
     }
