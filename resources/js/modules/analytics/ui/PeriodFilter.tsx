@@ -19,7 +19,7 @@ export const PeriodFilter: React.FC = () => {
                 router.reload({ data: { period: value } })
             }
         >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-full min-w-[160px] sm:w-44">
                 <SelectValue placeholder="Select a period" />
             </SelectTrigger>
             <SelectContent>

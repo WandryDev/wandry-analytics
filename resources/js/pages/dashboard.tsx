@@ -14,7 +14,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Dashboard() {
     const { props } = usePage<SharedData>();
-
     const registries = props.auth.registries;
 
     return (
