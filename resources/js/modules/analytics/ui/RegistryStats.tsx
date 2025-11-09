@@ -28,15 +28,15 @@ type RegistryAnalyticsProps = {
 export const RegistryStats: React.FC = () => {
     const page = usePage<SharedData & RegistryAnalyticsProps>();
     const registry = page.props.registry;
-    const registryTotals = page.props.analytics?.totals ?? {
+    const registryTotals = page.props?.analytics?.totals ?? {
         total: 0,
         days: 0,
         views: 0,
         visitors: 0,
     };
 
-    const countryAnalytics = page.props.analytics.countryAnalytics;
-    const componentsAnalytics = page.props.analytics.componentsAnalytics;
+    const countryAnalytics = page.props.analytics?.countryAnalytics ?? [];
+    const componentsAnalytics = page.props.analytics?.componentsAnalytics ?? {};
 
     return (
         <div className="space-y-4 px-6 py-10">

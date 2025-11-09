@@ -7,7 +7,7 @@ type ComponentsStatsProps = {
 };
 
 export const ComponentsStats: React.FC<ComponentsStatsProps> = ({
-    components,
+    components = {},
 }) => {
     return (
         <StatsCard title="Components">
