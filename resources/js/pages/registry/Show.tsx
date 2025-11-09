@@ -29,8 +29,6 @@ export default function Show() {
     const registry = page.props.registry;
     const token = page.props.token;
 
-    console.log('Registry page props:', page.props);
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={registry.name} />
