@@ -25,7 +25,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
             </CardHeader>
             <CardContent
                 className={cn(
-                    'max-h-[30vh] min-h-[30vh] overflow-x-auto',
+                    'max-h-[32rem] min-h-[18rem] overflow-auto sm:min-h-[22rem] lg:min-h-[30vh]',
                     classes?.content,
                 )}
             >

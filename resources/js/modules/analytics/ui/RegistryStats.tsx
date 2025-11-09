@@ -39,16 +39,18 @@ export const RegistryStats: React.FC = () => {
     const componentsAnalytics = page.props.analytics.componentsAnalytics;
 
     return (
-        <div className="space-y-4 px-6 py-10">
-            <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold">{registry.name}</h1>
-                <div className="flex items-center gap-x-2">
+        <div className="space-y-6 px-4 py-8 sm:px-6 sm:py-10">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <h1 className="text-3xl font-bold text-balance sm:text-4xl">
+                    {registry.name}
+                </h1>
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                     <PeriodFilter />
                     <RegerateTokenModal registryId={registry.id} />
                 </div>
             </div>
             <RegistryTotals data={registryTotals} />
-            <div className="mt-4 grid grid-cols-2 gap-x-4">
+            <div className="mt-4 grid gap-4 lg:grid-cols-2">
                 <CountriesStats countries={countryAnalytics} />
                 <ComponentsStats components={componentsAnalytics} />
             </div>

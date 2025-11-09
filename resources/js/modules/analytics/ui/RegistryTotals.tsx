@@ -34,15 +34,19 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
 
     return (
         <>
-            <CardHeader className="flex-row items-center justify-between px-0">
-                <CardTitle className="mt-6 mb-3 flex items-center gap-x-2">
+            <CardHeader className="flex flex-col items-start gap-2 px-0 sm:flex-row sm:items-center sm:justify-between">
+                <CardTitle className="mt-6 mb-1 flex flex-wrap items-center gap-2 text-pretty sm:mb-3">
                     {title}
-                    <p>{hasCards && totals.total}</p>
+                    {hasCards && (
+                        <span className="text-base font-normal text-muted-foreground">
+                            {totals.total}
+                        </span>
+                    )}
                 </CardTitle>
             </CardHeader>
             {hasCards && (
-                <CardDescription className="mt-0 flex">
-                    <Card className="w-full rounded-md rounded-r-none py-4 shadow-none">
+                <CardDescription className="mt-0 flex flex-col gap-4 sm:flex-row">
+                    <Card className="w-full rounded-md border py-4 shadow-none sm:rounded-r-none sm:border-r-0">
                         <CardContent>
                             <CardDescription className="mb-2">
                                 Daily installs
@@ -56,7 +60,7 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
                             </CardTitle>
                         </CardContent>
                     </Card>
-                    <Card className="w-full rounded-none py-4 shadow-none">
+                    <Card className="w-full rounded-md border py-4 shadow-none sm:rounded-none sm:border-x-0">
                         <CardContent>
                             <CardDescription className="mb-2">
                                 Weekly installs
@@ -70,7 +74,7 @@ export const RegistryTotals: React.FC<RegistryTotalsProps> = ({
                             </CardTitle>
                         </CardContent>
                     </Card>
-                    <Card className="w-full rounded-md rounded-l-none border-l-0 py-4 shadow-none">
+                    <Card className="w-full rounded-md border py-4 shadow-none sm:rounded-l-none sm:border-l-0">
                         <CardContent>
                             <CardDescription className="mb-2">
                                 Monthly installs
