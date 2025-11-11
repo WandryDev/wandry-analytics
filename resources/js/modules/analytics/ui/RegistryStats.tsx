@@ -15,9 +15,9 @@ import {
 } from '../model/analytics';
 import { PeriodFilter } from './PeriodFilter';
 import { RegistryTotals } from './RegistryTotals';
-import { AnalyticsCharts } from './AnalyticsCharts';
 import { CountriesStats } from './CountriesStats';
 import { ComponentsStats } from './ComponentsStats';
+import { AnalyticsComponents } from './AnalyticsCard';
 
 type RegistryAnalyticsProps = {
     registry: Registry;
@@ -63,17 +63,7 @@ export const RegistryStats: React.FC = () => {
                 />
                 <ComponentsStats components={componentsAnalytics} />
             </div>
-            {page.props.analytics &&
-                Object.entries(page.props.analytics?.analytics).map(
-                    ([component, data]) => (
-                        <AnalyticsCharts
-                            key={component}
-                            component={component}
-                            data={data}
-                            totals={registryTotals}
-                        />
-                    ),
-                )}
+            <AnalyticsComponents analytics={page.props.analytics} />
         </div>
     );
 };
