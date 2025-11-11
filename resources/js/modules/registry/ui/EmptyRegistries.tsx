@@ -9,9 +9,10 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
-import { CreateRegistryModal } from '@/modules/CreateRegistryModal';
 
-export const EmptyRegistries: React.FC = () => {
+import CreateRegistryModal from './CreateRegistryModal';
+
+const EmptyRegistries: React.FC = () => {
     return (
         <Empty>
             <EmptyHeader>
@@ -29,3 +30,5 @@ export const EmptyRegistries: React.FC = () => {
         </Empty>
     );
 };
+
+export default EmptyRegistries;

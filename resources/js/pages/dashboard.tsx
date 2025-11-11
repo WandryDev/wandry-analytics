@@ -1,9 +1,11 @@
 import { Head, usePage } from '@inertiajs/react';
-import AppLayout from '@/layouts/app-layout';
+
 import { dashboard } from '@/routes';
 import { SharedData, type BreadcrumbItem } from '@/types';
-import { EmptyRegistries } from '@/modules/registry/ui/EmptyRegistries';
-import { RegistriesList } from '@/modules/registry/ui/RegestiesList';
+
+import AppLayout from '@/layouts/app-layout';
+
+import { EmptyRegistries, RegistriesList } from '@/modules/registry';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

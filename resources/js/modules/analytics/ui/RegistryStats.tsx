@@ -1,5 +1,11 @@
 import React from 'react';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+
+import { SharedData } from '@/types';
+import { edit as registryEdit } from '@/routes/registry';
+
+import { Registry } from '@/modules/registry';
+import { Button } from '@/components/ui/button';
 
 import {
     ComponentsAnalytics,
@@ -7,16 +13,14 @@ import {
     RegistryAnalytics,
     Totals,
 } from '../model/analytics';
-import { SharedData } from '@/types';
 import { PeriodFilter } from './PeriodFilter';
 import { RegistryTotals } from './RegistryTotals';
 import { AnalyticsCharts } from './AnalyticsCharts';
-import { RegerateTokenModal } from './RegerateTokenModal';
 import { CountriesStats } from './CountriesStats';
 import { ComponentsStats } from './ComponentsStats';
 
 type RegistryAnalyticsProps = {
-    registry: any;
+    registry: Registry;
     analytics: {
         totals: Totals;
         analytics: RegistryAnalytics;
@@ -44,12 +48,19 @@ export const RegistryStats: React.FC = () => {
                 <h1 className="text-3xl font-bold">{registry.name}</h1>
                 <div className="flex items-center gap-x-2">
                     <PeriodFilter />
-                    <RegerateTokenModal registryId={registry.id} />
+                    <Button asChild>
+                        <Link href={registryEdit.url(registry.id)}>
+                            Edit registry
+                        </Link>
+                    </Button>
                 </div>
             </div>
             <RegistryTotals data={registryTotals} />
             <div className="mt-4 grid grid-cols-2 gap-x-4">
-                <CountriesStats countries={countryAnalytics} />
+                <CountriesStats
+                    registry={registry}
+                    countries={countryAnalytics}
+                />
                 <ComponentsStats components={componentsAnalytics} />
             </div>
             {page.props.analytics &&

@@ -36,6 +36,26 @@ class RegistryController extends Controller
         ]);
     }
 
+    public function edit(Registry $registry)
+    {
+        $this->authorize('action', $registry);
+
+        return Inertia::render('registry/Edit', [
+            'registry' => $registry,
+        ]);
+    }
+
+    public function update()
+    {
+        return;
+    }
+
+    public function setup() {
+        // Я тебе сюда отправляю allowCountryAnalytics и id registry с страницы setup
+        // Если тебе нужно изменить поле allowCountryAnalytics, пройдись просто поиском по проекту и измени везде
+        return redirect()->back();
+    }
+
     public function create()
     {
         return Inertia::render('registry/Create');
@@ -55,8 +75,9 @@ class RegistryController extends Controller
     {
         $this->authorize('action', $registry);
 
-        return response()->json([
-            'token' => $this->registryService->updateToken($registry),
+        return Inertia::render('registry/Edit', [
+            'registry' => fn() => $registry,
+            'token' => fn() => $this->registryService->updateToken($registry)
         ]);
     }
 }

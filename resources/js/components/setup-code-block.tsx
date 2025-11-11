@@ -1,5 +1,6 @@
 import React from 'react';
 import { CodeBlock } from './code-block';
+import { useWatch } from '@wandry/inertia-form';
 
 type SetupCodeBlockProps = {
     token: string;

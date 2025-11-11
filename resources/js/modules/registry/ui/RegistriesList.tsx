@@ -12,9 +12,7 @@ type RegistriesListProps = {
     registries?: any[];
 };
 
-export const RegistriesList: React.FC<RegistriesListProps> = ({
-    registries,
-}) => {
+const RegistriesList: React.FC<RegistriesListProps> = ({ registries }) => {
     return (
         <div className="mt-8 px-4">
             <h3 className="text-2xl font-medium">Your registries</h3>
@@ -35,3 +33,5 @@ export const RegistriesList: React.FC<RegistriesListProps> = ({
         </div>
     );
 };
+
+export default RegistriesList;

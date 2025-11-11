@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 
+import { CreateRegistryModal } from '@/modules/registry';
 import AppLogo from './app-logo';
-import { CreateRegistryModal } from '@/modules/CreateRegistryModal';
 
 export function AppSidebar() {
     return (
