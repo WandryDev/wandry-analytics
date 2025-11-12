@@ -9,6 +9,7 @@ import { SetupCodeBlock } from '@/components/setup-code-block';
 import TextField from '@/components/text-field';
 import SwitchField from '@/components/switch-field';
 import SubmitButton from '@/components/submit-button';
+import { SoonCard } from '@/components/soon-card';
 
 type SetupRegistryProps = {
     token: string;
@@ -75,20 +76,23 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
                         </p>
                         <SetupCodeBlock token={token} />
                     </div>
-                    <div className="flex items-start border-t pt-6">
-                        <div className="flex flex-col gap-y-2">
-                            <h4 className="font-semibold">
-                                Allow collection of anonymized country analytics
-                            </h4>
-                            <p className="text-xs text-muted-foreground">
-                                We collect anonymized data about the user's
-                                country to analyze the usage of the registry in
-                                different regions. You can disable this at any
-                                time.
-                            </p>
+                    <SoonCard>
+                        <div className="flex items-start border-t pt-6">
+                            <div className="flex flex-col gap-y-2">
+                                <h4 className="font-semibold">
+                                    Allow collection of anonymized country
+                                    analytics
+                                </h4>
+                                <p className="text-xs text-muted-foreground">
+                                    We collect anonymized data about the user's
+                                    country to analyze the usage of the registry
+                                    in different regions. You can disable this
+                                    at any time.
+                                </p>
+                            </div>
+                            <SwitchField name="allowCountryAnalytics" />
                         </div>
-                        <SwitchField name="allowCountryAnalytics" />
-                    </div>
+                    </SoonCard>
                 </div>
                 <SubmitButton className="mt-5 cursor-pointer">
                     Finish setup
