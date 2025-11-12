@@ -37,7 +37,7 @@ const CountriesList: React.FC<{ countries: CountriesAnalytics[] }> = ({
     countries,
 }) => {
     return (
-        <div className="flex flex-col">
+        <div className="no-scrollbar flex flex-col">
             {countries.map(({ country, code, eventsCount }) => (
                 <div key={country} className="flex justify-between py-1">
                     <div className="flex items-center gap-x-2">

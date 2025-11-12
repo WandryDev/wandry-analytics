@@ -11,7 +11,7 @@ export const ComponentsStats: React.FC<ComponentsStatsProps> = ({
 }) => {
     return (
         <StatsCard title="Components">
-            <div className="flex flex-col">
+            <div className="no-scrollbar flex flex-col">
                 {Object.entries(components || {}).map(([component, count]) => (
                     <div key={component} className="flex justify-between py-1">
                         <span className="font-medium">
