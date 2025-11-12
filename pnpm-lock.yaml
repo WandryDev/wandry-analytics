@@ -78,8 +78,8 @@ importers:
         specifier: ^5.0.0
         version: 5.1.0(vite@7.1.12(@types/node@22.18.13)(jiti@2.6.1)(lightningcss@1.30.2))
       '@wandry/inertia-form':
-        specifier: 1.11.0-beta.2
-        version: 1.11.0-beta.2(@inertiajs/core@2.2.13)(@inertiajs/react@2.2.13(react@19.2.0))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(clsx@2.1.1)(react@19.2.0)
+        specifier: ^1.11.0
+        version: 1.11.0(@inertiajs/core@2.2.13)(@inertiajs/react@2.2.13(react@19.2.0))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(clsx@2.1.1)(react@19.2.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1463,8 +1463,8 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@wandry/inertia-form@1.11.0-beta.2':
-    resolution: {integrity: sha512-Dr6p1IE938rvUVJ1FEa0QB6jIYB67+JJwu6vyXjmO7itqIqR2BgUKuJW7wsctxD3IPDgqk2smq7gH72vArQhoQ==}
+  '@wandry/inertia-form@1.11.0':
+    resolution: {integrity: sha512-Kcy7A++F0joWR8h4BieXH2KYsP1LLadCnqv7G/pfHs/g8VkptIinrqcJxusMbFJA+JbmQuQUFlnV/DKBtZMwGg==}
     peerDependencies:
       '@inertiajs/core': '>=1'
       '@inertiajs/react': '>=1'
@@ -4382,7 +4382,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wandry/inertia-form@1.11.0-beta.2(@inertiajs/core@2.2.13)(@inertiajs/react@2.2.13(react@19.2.0))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(clsx@2.1.1)(react@19.2.0)':
+  '@wandry/inertia-form@1.11.0(@inertiajs/core@2.2.13)(@inertiajs/react@2.2.13(react@19.2.0))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(clsx@2.1.1)(react@19.2.0)':
     dependencies:
       '@inertiajs/core': 2.2.13
       '@inertiajs/react': 2.2.13(react@19.2.0)
