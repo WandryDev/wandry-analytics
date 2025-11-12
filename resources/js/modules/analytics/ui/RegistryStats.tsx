@@ -67,3 +67,5 @@ export const RegistryStats: React.FC = () => {
         </div>
     );
 };
+
+//
