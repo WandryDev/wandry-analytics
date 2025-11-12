@@ -40,10 +40,12 @@ export default function Pricing() {
                             <div className="relative">
                                 <ul role="list" className="space-y-4">
                                     {[
-                                        'Real-Time Analytics',
-                                        'Easy Setup',
-                                        'Full Feature Access',
+                                        'Component Insights',
+                                        'Geographic Analytics',
+                                        'Privacy-Friendly',
+                                        'Multi-Registry Support',
                                         'No Hidden Limits',
+                                        'Easy Setup',
                                     ].map((item, index) => (
                                         <li
                                             key={index}

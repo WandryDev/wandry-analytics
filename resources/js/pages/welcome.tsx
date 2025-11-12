@@ -3,6 +3,8 @@ import FooterSection from '@/components/footer';
 import HeroSection from '@/components/hero-section-one';
 import Pricing from '@/components/pricing';
 import SeoBlock from '@/components/seo-block';
+import { SetupSection } from '@/components/setup-section';
+import { UserStory } from '@/components/ui/user-story';
 
 import { Head } from '@inertiajs/react';
 
@@ -17,10 +19,15 @@ export default function Welcome() {
                 />
             </Head>
             <HeroSection />
+            <UserStory />
             <Features />
-            <SeoBlock />
+            <SetupSection />
             <Pricing />
             <FooterSection />
+            {/* 
+            <SeoBlock />
+            
+            <FooterSection /> */}
         </>
     );
 }

@@ -22,11 +22,13 @@ export const CountriesStats: React.FC<CountriesStatsProps> = ({
 }) => {
     return (
         <StatsCard title="Countries">
-            {!registry.allowCountryAnalytics ? (
+            {/* SOON */}
+            {/* {!registry.allowCountryAnalytics ? (
                 <NotAvailableCard description="You haven’t granted permission to collect anonymous data for country analytics. If you want this, enable it in the registry settings." />
             ) : (
                 <CountriesList countries={countries} />
-            )}
+            )} */}
+            <CountriesList countries={countries} />
         </StatsCard>
     );
 };

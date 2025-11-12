@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 
 import { Registry } from '../models/registry';
 import { RegerateTokenModal } from './RegerateTokenModal';
+import { SoonCard } from '@/components/soon-card';
 
 type EditRegistryFormProps = {
     defaultValue: Registry;
@@ -37,21 +38,24 @@ const EditRegistryForm: React.FC<EditRegistryFormProps> = ({
 
             <div className="">
                 <h3 className="text-2xl font-semibold">Policies</h3>
-                <div className="mt-6 flex flex-col">
-                    <div className="mb-3 flex items-start justify-between">
-                        <div className="">
-                            <p className="text-lg">
-                                Allow collection of anonymized country analytics
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                                We collect anonymized data about the user's
-                                country to analyze the usage of the registry in
-                                different regions
-                            </p>
+                <SoonCard>
+                    <div className="mt-6 flex flex-col">
+                        <div className="mb-3 flex items-start justify-between">
+                            <div className="">
+                                <p className="text-lg">
+                                    Allow collection of anonymized country
+                                    analytics
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                    We collect anonymized data about the user's
+                                    country to analyze the usage of the registry
+                                    in different regions
+                                </p>
+                            </div>
+                            <SwitchField name="allowCountryAnalytics" />
                         </div>
-                        <SwitchField name="allowCountryAnalytics" />
                     </div>
-                </div>
+                </SoonCard>
             </div>
 
             <div className="border-t pt-4">
@@ -67,16 +71,20 @@ const EditRegistryForm: React.FC<EditRegistryFormProps> = ({
                         </div>
                         <RegerateTokenModal registryId={id} />
                     </div>
-                    <div className="flex items-start justify-between">
-                        <div className="">
-                            <p className="text-lg">Delete registry</p>
-                            <p className="text-sm text-muted-foreground">
-                                Once you delete a registry, there is no going
-                                back. Please be certain.
-                            </p>
+                    <SoonCard>
+                        <div className="flex items-start justify-between">
+                            <div className="">
+                                <p className="text-lg">Delete registry</p>
+                                <p className="text-sm text-muted-foreground">
+                                    Once you delete a registry, there is no
+                                    going back. Please be certain.
+                                </p>
+                            </div>
+                            <Button variant="destructive">
+                                Delete registry
+                            </Button>
                         </div>
-                        <Button variant="destructive">Delete registry</Button>
-                    </div>
+                    </SoonCard>
                 </div>
             </div>
         </Form>

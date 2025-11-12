@@ -11,15 +11,15 @@ const links = [
         href: '#pricing',
     },
     {
-        title: 'About',
-        href: '#about',
+        title: 'Getting started',
+        href: '#getting-started',
     },
 ];
 
 export default function FooterSection() {
     return (
-        <footer className="flex w-full flex-col px-6 py-16">
-            <div className="flex items-center justify-between">
+        <footer className="@container mx-auto flex w-full max-w-6xl flex-col px-6 py-16">
+            <div className="flex flex-col items-center justify-between md:flex-row">
                 <Link
                     href="/"
                     aria-label="go home"

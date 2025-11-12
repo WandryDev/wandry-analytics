@@ -28,17 +28,7 @@ export const HeroDemo: React.FC = () => {
                     Watch demo
                 </Button>
             </DialogTrigger>
-            <DialogContent className="w-[90vw] lg:max-w-[70vw]">
-                <video
-                    ref={videoRef}
-                    controls={false}
-                    loop
-                    muted
-                    className="w-full"
-                >
-                    <source src="/WandryAnalyticsDemo.mp4" type="video/mp4" />
-                </video>
-            </DialogContent>
+            <DialogContent className="w-[90vw] lg:max-w-[70vw]"></DialogContent>
         </Dialog>
     );
 };
