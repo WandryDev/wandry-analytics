@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RefreshCcw } from 'lucide-react';
-import { Form } from '@wandry/inertia-form';
 
 import { toast } from 'sonner';
 
-import {
-    FormSetupCodeBlock,
-    SetupCodeBlock,
-} from '@/components/setup-code-block';
+import { SetupCodeBlock } from '@/components/setup-code-block';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
 
-import TextField from '@/components/text-field';
-import SubmitButton from '@/components/submit-button';
 import { token as registryUpdateToken } from '@/routes/registry/update';
 import { router, usePage } from '@inertiajs/react';
 import { Field, FieldDescription, FieldLabel } from '@/components/ui/field';
