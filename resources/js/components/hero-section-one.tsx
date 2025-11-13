@@ -1,22 +1,18 @@
+import { useRef } from 'react';
 import { Link } from '@inertiajs/react';
 
 import { register } from '@/routes';
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks/use-mobile';
 
-import HeroImage from '@/assets/images/hero.png';
+import { motion, useScroll, useTransform, Variants } from 'motion/react';
+
 import { SiteNav } from './site-nav';
 import { TextEffect } from './ui/text-effect';
 import { AnimatedGroup } from './ui/animated-group';
-import {
-    motion,
-    MotionValue,
-    useScroll,
-    useTransform,
-    Variants,
-} from 'motion/react';
 import { BorderTrail } from './ui/border-trail';
-import { useRef } from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
+
+import HeroImage from '@/assets/images/hero.png';
 
 const itemVariants = {
     hidden: {

@@ -24,10 +24,6 @@ export default function Welcome() {
             <SetupSection />
             <Pricing />
             <FooterSection />
-            {/* 
-            <SeoBlock />
-            
-            <FooterSection /> */}
         </>
     );
 }
