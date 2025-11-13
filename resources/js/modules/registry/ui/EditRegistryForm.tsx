@@ -20,7 +20,9 @@ const EditRegistryForm: React.FC<EditRegistryFormProps> = ({
 }) => {
     return (
         <Form
-            {...registry.update.form(id)}
+            action=""
+            method="post"
+            // {...registry.update.form(id)}
             defaultValues={defaultValue}
             className="space-y-8 px-10 pt-10"
         >
