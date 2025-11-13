@@ -11,6 +11,7 @@ class RegistryRequest extends FormRequest
         return [
             'name' => 'required|string',
             'url' => 'required|url',
+            'country_stats' => 'sometimes|boolean',
         ];
     }
 }

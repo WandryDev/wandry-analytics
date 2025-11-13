@@ -20,8 +20,8 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
 }) => {
     return (
         <Form
-            action={route('registry.setup', registry.id)}
             method="post"
+            action={route('registry.setup', registry.id)}
             defaultValues={{ id: registry.id }}
         >
             <div className="max-w-full px-6 py-10 md:max-w-[55vw]">
@@ -78,23 +78,20 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
                         </p>
                         <SetupCodeBlock token={token} />
                     </div>
-                    <SoonCard>
-                        <div className="flex items-start border-t pt-6">
-                            <div className="flex flex-col gap-y-2">
-                                <h4 className="font-semibold">
-                                    Allow collection of anonymized country
-                                    analytics
-                                </h4>
-                                <p className="text-xs text-muted-foreground">
-                                    We collect anonymized data about the user's
-                                    country to analyze the usage of the registry
-                                    in different regions. You can disable this
-                                    at any time.
-                                </p>
-                            </div>
-                            <SwitchField name="allowCountryAnalytics" />
+                    <div className="flex items-start border-t pt-6">
+                        <div className="flex flex-col gap-y-2">
+                            <h4 className="font-semibold">
+                                Allow collection of anonymized country analytics
+                            </h4>
+                            <p className="text-xs text-muted-foreground">
+                                We collect anonymized data about the user's
+                                country to analyze the usage of the registry in
+                                different regions. You can disable this at any
+                                time.
+                            </p>
                         </div>
-                    </SoonCard>
+                        <SwitchField name="allowCountryAnalytics" />
+                    </div>
                 </div>
                 <SubmitButton className="mt-5 cursor-pointer">
                     Finish setup
