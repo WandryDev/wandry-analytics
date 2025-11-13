@@ -1,5 +1,4 @@
 import { Head, usePage } from '@inertiajs/react';
-import { dashboard } from '@/routes';
 import { SharedData, type BreadcrumbItem } from '@/types';
 
 import AppLayout from '@/layouts/app-layout';
@@ -11,7 +10,7 @@ import { SetupRegistry } from '@/modules/registry/ui/SetupRegistry';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
-        href: dashboard().url,
+        href: route('dashboard'),
     },
 ];
 

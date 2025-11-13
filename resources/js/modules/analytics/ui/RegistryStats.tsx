@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
 
 import { SharedData } from '@/types';
-// import { edit as registryEdit } from '@/routes/registry';
 
 import { Registry } from '@/modules/registry';
 import { Button } from '@/components/ui/button';
@@ -49,7 +48,7 @@ export const RegistryStats: React.FC = () => {
                 <div className="flex items-center gap-x-2">
                     <PeriodFilter />
                     <Button asChild>
-                        <Link href={`/registry/${registry.id}/edit`}>
+                        <Link href={route('registry.edit', registry.id)}>
                             Edit registry
                         </Link>
                     </Button>

@@ -4,9 +4,7 @@ import { Link, usePage } from '@inertiajs/react';
 
 import { cn } from '@/lib/utils';
 
-import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
-import { dashboard, login, register } from '@/routes';
 import AppLogo from './app-logo';
 
 const menuItems = [
@@ -108,7 +106,7 @@ export const HeroHeader = () => {
                                             isScrolled && 'lg:hidden',
                                         )}
                                     >
-                                        <Link href={dashboard()}>
+                                        <Link href={route('dashboard')}>
                                             <span>Go to dashboard</span>
                                         </Link>
                                     </Button>
@@ -123,7 +121,7 @@ export const HeroHeader = () => {
                                             isScrolled && 'lg:hidden',
                                         )}
                                     >
-                                        <Link href={login()}>
+                                        <Link href={route('login')}>
                                             <span>Login</span>
                                         </Link>
                                     </Button>
@@ -134,7 +132,7 @@ export const HeroHeader = () => {
                                             isScrolled && 'lg:hidden',
                                         )}
                                     >
-                                        <Link href={register()}>
+                                        <Link href={route('register')}>
                                             <span>Sign Up</span>
                                         </Link>
                                     </Button>

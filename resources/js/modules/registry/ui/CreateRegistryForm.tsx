@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button';
 import TextField from '@/components/text-field';
 import SubmitButton from '@/components/submit-button';
 
-import registry from '@/routes/registry';
-
 type CreateRegistryFormProps = {
     onSuccess?: () => void;
 };
@@ -18,7 +16,7 @@ export const CreateRegistryForm: React.FC<CreateRegistryFormProps> = ({
 }) => {
     return (
         <Form
-            {...registry.store.form()}
+            action={route('registry.store')}
             id="registry_create"
             options={{ onSuccess }}
             resetOnSuccess

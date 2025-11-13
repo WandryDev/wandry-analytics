@@ -1,6 +1,4 @@
 // Components
-import { login } from '@/routes';
-import { email } from '@/routes/password';
 import { Head } from '@inertiajs/react';
 
 import { Form } from '@wandry/inertia-form';
@@ -25,7 +23,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
             )}
 
             <div className="space-y-6">
-                <Form {...email.form()}>
+                <Form
+                    action={route('password.email')}
+                    method="post"
+                    className="space-y-6"
+                >
                     <>
                         <TextField
                             name="email"
@@ -49,7 +51,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
                 <div className="space-x-1 text-center text-sm text-muted-foreground">
                     <span>Or, return to</span>
-                    <TextLink href={login()}>log in</TextLink>
+                    <TextLink href={route('login')}>log in</TextLink>
                 </div>
             </div>
         </AuthLayout>

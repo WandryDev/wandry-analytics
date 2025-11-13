@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import { register } from '@/routes';
 
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
@@ -38,7 +37,7 @@ export const SetupSection: React.FC = () => {
                                         size="sm"
                                         className="w-full"
                                     >
-                                        <Link href={register()}>
+                                        <Link href={route('register')}>
                                             <span>Create an account</span>
                                         </Link>
                                     </Button>
