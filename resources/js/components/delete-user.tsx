@@ -1,4 +1,6 @@
-import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
+import { useRef } from 'react';
+import { Form } from '@wandry/inertia-form';
+
 import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,8 +12,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { Form } from '@wandry/inertia-form';
-import { useRef } from 'react';
+
 import PasswordField from './password-field';
 import SubmitButton from './submit-button';
 
@@ -53,7 +54,8 @@ export default function DeleteUser() {
                         </DialogDescription>
 
                         <Form
-                            {...ProfileController.destroy.form()}
+                            action={route('profile.destroy')}
+                            method="delete"
                             options={{
                                 preserveScroll: true,
                                 onError: () => passwordInput.current?.focus(),
@@ -76,7 +78,7 @@ export default function DeleteUser() {
                                         </Button>
                                     </DialogClose>
 
-                                    <SubmitButton variant="destructive" asChild>
+                                    <SubmitButton variant="destructive">
                                         Delete account
                                     </SubmitButton>
                                 </DialogFooter>

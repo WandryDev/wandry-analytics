@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 import { Link } from '@inertiajs/react';
-import { login } from '@/routes';
 
 export default function Pricing() {
     return (
@@ -28,7 +27,9 @@ export default function Pricing() {
 
                                 <div className="flex justify-center">
                                     <Button asChild size="lg">
-                                        <Link href={login()}>Get started</Link>
+                                        <Link href={route('login')}>
+                                            Get started
+                                        </Link>
                                     </Button>
                                 </div>
 

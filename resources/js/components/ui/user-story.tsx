@@ -1,8 +1,5 @@
-import { motion } from 'motion/react';
 import React from 'react';
-import { Button } from './button';
-import { Link } from '@inertiajs/react';
-import { register } from '@/routes';
+import { motion } from 'motion/react';
 import { ChartNoAxesCombined } from 'lucide-react';
 
 export const UserStory: React.FC = () => {

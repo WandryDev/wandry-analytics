@@ -11,7 +11,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
 
 import { CreateRegistryModal } from '@/modules/registry';
 import AppLogo from './app-logo';
@@ -23,7 +22,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={dashboard()} prefetch>
+                            <Link href={route('dashboard')} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

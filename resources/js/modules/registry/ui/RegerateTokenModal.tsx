@@ -13,7 +13,6 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 
-import { token as registryUpdateToken } from '@/routes/registry/update';
 import { router, usePage } from '@inertiajs/react';
 import { Field, FieldDescription, FieldLabel } from '@/components/ui/field';
 import {
@@ -59,7 +58,7 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
 
     const onRenegerate = () => {
         router.get(
-            registryUpdateToken(registryId),
+            route('registry.update.token', registryId),
             {},
             {
                 preserveState: true,

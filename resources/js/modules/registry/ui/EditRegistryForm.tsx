@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form } from '@wandry/inertia-form';
 
-import registry from '@/routes/registry';
 import TextField from '@/components/text-field';
 import SwitchField from '@/components/switch-field';
 
@@ -20,9 +19,8 @@ const EditRegistryForm: React.FC<EditRegistryFormProps> = ({
 }) => {
     return (
         <Form
-            action=""
-            method="post"
-            // {...registry.update.form(id)}
+            method="put"
+            action={route('registry.update', id)}
             defaultValues={defaultValue}
             className="space-y-8 px-10 pt-10"
         >

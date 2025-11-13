@@ -11,7 +11,6 @@ import CountriesChart from '@/assets/images/features/countries-chart.png';
 import FeaturePrivacy2 from '@/assets/images/features/privacy-2.png';
 import { Button } from './ui/button';
 import { Link } from '@inertiajs/react';
-import { register } from '@/routes';
 
 type Feature = {
     heading: string;
@@ -118,7 +117,7 @@ export default function Features() {
                             </div>
                         ))}
                         <Button asChild size="lg" className="mt-10 w-max">
-                            <Link href={register()}>
+                            <Link href={route('register')}>
                                 <span className="btn-label">
                                     Start collect statistics
                                 </span>
@@ -162,7 +161,7 @@ export default function Features() {
                                     transition={{ duration: 1, delay: 0.3 }}
                                 >
                                     <Button asChild size="lg">
-                                        <Link href={register()}>
+                                        <Link href={route('register')}>
                                             <span className="btn-label">
                                                 Add your Registry now
                                             </span>

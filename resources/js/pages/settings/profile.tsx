@@ -1,4 +1,3 @@
-import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import { send } from '@/routes/verification';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
@@ -10,12 +9,11 @@ import SubmitButton from '@/components/submit-button';
 import TextField from '@/components/text-field';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
-import { edit } from '@/routes/profile';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Profile settings',
-        href: edit().url,
+        href: route('profile.edit'),
     },
 ];
 
@@ -40,7 +38,8 @@ export default function Profile({
                     />
 
                     <Form
-                        {...ProfileController.update.form()}
+                        action={route('profile.update')}
+                        method="patch"
                         options={{
                             preserveScroll: true,
                         }}
@@ -92,18 +91,6 @@ export default function Profile({
                                 <SubmitButton data-test="update-profile-button">
                                     Save
                                 </SubmitButton>
-
-                                {/* <Transition
-                                    show={recentlySuccessful}
-                                    enter="transition ease-in-out"
-                                    enterFrom="opacity-0"
-                                    leave="transition ease-in-out"
-                                    leaveTo="opacity-0"
-                                >
-                                    <p className="text-sm text-neutral-600">
-                                        Saved
-                                    </p>
-                                </Transition> */}
                             </div>
                         </>
                     </Form>

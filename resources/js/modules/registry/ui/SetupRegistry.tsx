@@ -1,8 +1,6 @@
 import React from 'react';
 import { Form } from '@wandry/inertia-form';
 
-import { setup as registrySetup } from '@/routes/registry';
-
 import { CodeBlock } from '@/components/code-block';
 import { SetupCodeBlock } from '@/components/setup-code-block';
 
@@ -22,7 +20,7 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
 }) => {
     return (
         <Form
-            action="registry/setup"
+            action={route('registry.setup', registry.id)}
             method="post"
             defaultValues={{ id: registry.id }}
         >

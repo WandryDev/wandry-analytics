@@ -6,7 +6,6 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { resolveUrl } from '@/lib/utils';
-import registry from '@/routes/registry';
 import { Link, usePage } from '@inertiajs/react';
 
 export function NavMain() {
@@ -27,7 +26,10 @@ export function NavMain() {
                                 )}
                                 tooltip={{ children: item.name }}
                             >
-                                <Link href={registry.show(item.id)} prefetch>
+                                <Link
+                                    href={route('registry.show', item.id)}
+                                    prefetch
+                                >
                                     {item.icon && <item.icon />}
                                     <span>{item.name}</span>
                                 </Link>

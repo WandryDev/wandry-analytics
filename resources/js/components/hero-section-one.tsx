@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { Link } from '@inertiajs/react';
 
-import { register } from '@/routes';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -40,7 +39,7 @@ export default function HeroSection() {
             <main>
                 <div
                     aria-hidden
-                    className="absolute inset-0 isolate z-2 hidden opacity-50 contain-strict lg:block"
+                    className="absolute inset-0 isolate z-0 hidden opacity-50 contain-strict lg:block"
                 >
                     <div className="absolute top-0 left-0 h-320 w-140 -translate-y-87.5 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
                     <div className="absolute top-0 left-0 h-320 w-60 [translate:5%_-50%] -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
@@ -85,7 +84,7 @@ export default function HeroSection() {
                                 }}
                             >
                                 <Button asChild size="lg">
-                                    <Link href={register()}>
+                                    <Link href={route('register')}>
                                         <span className="btn-label">
                                             Start analytics for free
                                         </span>
@@ -206,7 +205,7 @@ const HeroImageSection: React.FC = () => {
         return (
             <div
                 ref={ref}
-                className="relative mx-auto mt-10 max-w-6xl overflow-hidden rounded-2xl border bg-background p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 ring-background md:mt-0 dark:inset-shadow-white/20"
+                className="relative z-9999 mx-auto mt-10 max-w-6xl overflow-hidden rounded-2xl border bg-background p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 ring-background md:mt-0 dark:inset-shadow-white/20"
             >
                 <BorderTrail
                     style={{
