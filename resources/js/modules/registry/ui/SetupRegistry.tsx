@@ -21,7 +21,11 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
     token,
 }) => {
     return (
-        <Form {...registrySetup.form()} defaultValues={{ id: registry.id }}>
+        <Form
+            action="registry/setup"
+            method="post"
+            defaultValues={{ id: registry.id }}
+        >
             <div className="max-w-full px-6 py-10 md:max-w-[55vw]">
                 <h2 className="text-4xl font-extrabold tracking-tight text-balance">
                     Setup your Regisry
