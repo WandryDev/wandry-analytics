@@ -8,6 +8,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 /**
  * @property mixed $user
+ * @property mixed $country_stats
  */
 class Registry extends Model
 {
@@ -19,6 +20,7 @@ class Registry extends Model
         'name',
         'url',
         'user_id',
+        'country_stats',
     ];
 
 

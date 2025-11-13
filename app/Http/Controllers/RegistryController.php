@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Data\RegistryData;
-use App\Http\Requests\RegistryRequest;
+use App\Http\Requests\Registries\RegistryRequest;
 use App\Models\Registry;
 use App\Services\RegistryService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -45,14 +45,23 @@ class RegistryController extends Controller
         ]);
     }
 
-    public function update()
+    public function update(RegistryRequest $request, Registry $registry)
     {
-        return;
+        $this->authorize('action', $registry);
+
+        $registry->update($request->validated());
+
+        return redirect()->route('registry.show', $registry);
     }
 
-    public function setup() {
-        // Я тебе сюда отправляю allowCountryAnalytics и id registry с страницы setup
-        // Если тебе нужно изменить поле allowCountryAnalytics, пройдись просто поиском по проекту и измени везде
+    public function setup(Request $request, Registry $registry) {
+        $this->authorize('action', $registry);
+
+        $this->registryService->setUpCountryStat(
+            registry: $registry,
+            allowCountryAnalytics: (bool)$request->input('allowCountryAnalytics', false),
+        );
+
         return redirect()->back();
     }
 
