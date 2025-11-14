@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Event;
+use App\Models\Registry;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +17,11 @@ class DetermineCountries extends Command
      */
     public function handle()
     {
-        $events = Event::whereNull('country')->where('eventable_id', '!=', 12)->limit(40)->get();
+        $events = Event::whereHas('eventable', function ($query) {
+            $query->where('country_stats', true);
+        })->whereNull('country')
+            ->where('eventable_id', '!=', 12)
+            ->limit(40)->get();
 
         foreach ($events as $event) {
             $response = Http::get('http://demo.ip-api.com/json/' . $event->ip);
