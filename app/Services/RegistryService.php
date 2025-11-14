@@ -122,4 +122,10 @@ class RegistryService
 
         return $countryAnalytics->values()->toArray();
     }
+
+    public function setUpCountryStat(Registry $registry, bool $allowCountryAnalytics): void
+    {
+        $registry->country_stats = $allowCountryAnalytics;
+        $registry->save();
+    }
 }

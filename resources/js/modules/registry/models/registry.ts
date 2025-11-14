@@ -5,5 +5,5 @@ export type Registry = {
     user_id: number;
     created_at: string;
     updated_at: string;
-    allowCountryAnalytics: boolean;
+    country_stats: boolean;
 };
