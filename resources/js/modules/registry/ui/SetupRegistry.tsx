@@ -2,11 +2,13 @@ import React from 'react';
 import { Form } from '@wandry/inertia-form';
 
 import { CodeBlock } from '@/components/code-block';
-import { SetupCodeBlock } from '@/components/setup-code-block';
+import { PublicSetupCodeBlock } from '@/components/setup-code-block';
+import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/ui/tabs';
 
 import TextField from '@/components/text-field';
 import SwitchField from '@/components/switch-field';
 import SubmitButton from '@/components/submit-button';
+import { StepItem } from '@/components/step';
 
 type SetupRegistryProps = {
     token: string;
@@ -21,7 +23,7 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
         <Form
             method="post"
             action={route('registry.setup', registry.id)}
-            defaultValues={{ id: registry.id }}
+            defaultValues={{ id: registry.id, token }}
         >
             <div className="max-w-full px-6 py-10 md:max-w-[55vw]">
                 <h2 className="text-4xl font-extrabold tracking-tight text-balance">
@@ -33,65 +35,102 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
                     will work great.
                 </p>
 
-                <div className="mt-10 space-y-6">
-                    <div className="space-y-5">
-                        <div className="flex items-center gap-x-4">
-                            <div className="flex size-10 items-center justify-center rounded-full bg-muted text-xs font-bold">
-                                1
-                            </div>
-                            <h3 className="text-lg font-medium tracking-tight">
-                                Install @wandry/analytics-sdk
-                            </h3>
+                <Tabs defaultValue="public" className="mt-10">
+                    <TabsList className="mb-6" variant="underline">
+                        <TabsTab value="public">Public Registry</TabsTab>
+                        <TabsTab value="private">Private Registry</TabsTab>
+                    </TabsList>
+
+                    <TabsPanel value="public" className="space-y-6">
+                        <div className="space-y-5">
+                            <StepItem
+                                stepNumber={1}
+                                title="Install @wandry/analytics-sdk"
+                            />
+
+                            <CodeBlock
+                                code={`npm install @wandry/analytics-sdk`}
+                                lang="bash"
+                                minHeight="min-h-15"
+                            />
                         </div>
-                        <CodeBlock
-                            code={`npm install @wandry/analytics-sdk`}
-                            lang="bash"
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <div className="flex items-center gap-x-4">
-                            <div className="flex size-10 items-center justify-center rounded-full bg-muted text-xs font-bold">
-                                2
-                            </div>
-                            <h3 className="text-lg font-medium tracking-tight">
-                                Get the token and add it to your project.
-                            </h3>
-                        </div>
-                        <Form action="" method="post" defaultValues={{ token }}>
+                        <div className="space-y-2">
+                            <StepItem
+                                stepNumber={2}
+                                title="Get the token and add it to your project."
+                            />
+
                             <TextField readOnly name="token" />
-                        </Form>
-                    </div>
-                    <div className="space-y-2">
-                        <div className="flex items-center gap-x-4">
-                            <div className="flex size-10 items-center justify-center rounded-full bg-muted text-xs font-bold">
-                                3
-                            </div>
-                            <h3 className="text-lg font-medium tracking-tight">
-                                Start tracking events for fetching registry.json
-                                in your code.
-                            </h3>
                         </div>
-                        <p>
-                            For a Nextjs project paste this code snippet in your
-                            middleware or API route
+                        <div className="space-y-2">
+                            <StepItem
+                                stepNumber={2}
+                                title="Start tracking events for fetching
+                                    registry.json in your code."
+                                description={
+                                    <p className="mb-4 text-sm text-muted-foreground">
+                                        For a Nextjs project paste this code
+                                        snippet in your middleware or API route
+                                    </p>
+                                }
+                            />
+
+                            <PublicSetupCodeBlock token={token} />
+                        </div>
+                    </TabsPanel>
+
+                    <TabsPanel value="private" className="space-y-6">
+                        <div className="space-y-5">
+                            <StepItem
+                                stepNumber={1}
+                                title="Install @wandry/analytics-sdk"
+                            />
+
+                            <CodeBlock
+                                code={`npm install @wandry/analytics-sdk`}
+                                lang="bash"
+                                minHeight="min-h-15"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <StepItem
+                                stepNumber={2}
+                                title="Get the token and add it to your project."
+                            />
+
+                            <TextField readOnly name="token" />
+                        </div>
+                        <div className="space-y-2">
+                            <StepItem
+                                stepNumber={2}
+                                title="Start tracking events for fetching
+                                    registry.json in your code."
+                                description={
+                                    <p className="mb-4 text-sm text-muted-foreground">
+                                        For a Nextjs project paste this code
+                                        snippet in your middleware or API route
+                                    </p>
+                                }
+                            />
+
+                            <PublicSetupCodeBlock token={token} />
+                        </div>
+                    </TabsPanel>
+                </Tabs>
+                <div className="mt-4 flex items-start border-t pt-6">
+                    <div className="flex flex-col gap-y-2">
+                        <h4 className="font-semibold">
+                            Allow collection of anonymized country analytics
+                        </h4>
+                        <p className="text-xs text-muted-foreground">
+                            We collect anonymized data about the user's country
+                            to analyze the usage of the registry in different
+                            regions. You can disable this at any time.
                         </p>
-                        <SetupCodeBlock token={token} />
                     </div>
-                    <div className="flex items-start border-t pt-6">
-                        <div className="flex flex-col gap-y-2">
-                            <h4 className="font-semibold">
-                                Allow collection of anonymized country analytics
-                            </h4>
-                            <p className="text-xs text-muted-foreground">
-                                We collect anonymized data about the user's
-                                country to analyze the usage of the registry in
-                                different regions. You can disable this at any
-                                time.
-                            </p>
-                        </div>
-                        <SwitchField name="allowCountryAnalytics" />
-                    </div>
+                    <SwitchField name="allowCountryAnalytics" />
                 </div>
+
                 <SubmitButton className="mt-5 cursor-pointer">
                     Finish setup
                 </SubmitButton>

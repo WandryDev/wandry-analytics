@@ -3,7 +3,7 @@ import { RefreshCcw } from 'lucide-react';
 
 import { toast } from 'sonner';
 
-import { SetupCodeBlock } from '@/components/setup-code-block';
+import { PublicSetupCodeBlock } from '@/components/setup-code-block';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -93,7 +93,7 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
                 </FieldDescription>
             </Field>
             <div className="mt-6">
-                <SetupCodeBlock token={token} />
+                <PublicSetupCodeBlock token={token} />
             </div>
         </div>
     );
