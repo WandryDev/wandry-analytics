@@ -3,7 +3,7 @@ import { RefreshCcw } from 'lucide-react';
 
 import { toast } from 'sonner';
 
-import { SetupCodeBlock } from '@/components/setup-code-block';
+import { PublicSetupCodeBlock } from '@/components/setup-code-block';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -40,7 +40,7 @@ export const RegerateTokenModal: React.FC<RegerateTokenModalProps> = ({
                     Regenerate token
                 </Button>
             </DialogTrigger>
-            <DialogContent className="md:max-w-[65vw]">
+            <DialogContent className="md:max-w-[80vw]">
                 <DialogHeader>
                     <DialogTitle>Create a new token</DialogTitle>
                 </DialogHeader>
@@ -71,7 +71,7 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
     };
 
     return (
-        <div className="mt-4 w-[95%]">
+        <div className="mt-4 w-full">
             <Field>
                 <FieldLabel>Your token</FieldLabel>
                 <InputGroup>
@@ -93,7 +93,7 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
                 </FieldDescription>
             </Field>
             <div className="mt-6">
-                <SetupCodeBlock token={token} />
+                <PublicSetupCodeBlock token={token} />
             </div>
         </div>
     );

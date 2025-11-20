@@ -10,6 +10,7 @@ type CodeBlockProps = {
     containerClassName?: string;
     codeClassName?: string;
     hasCopyButton?: boolean;
+    minHeight?: string;
 };
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -42,12 +43,15 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     return (
         <div
             className={cn(
-                'relative w-full rounded-lg bg-muted px-4 py-2 pr-15',
+                'relative w-full rounded-lg border border-border bg-muted px-4 py-2 pr-15',
                 containerClassName,
             )}
         >
-            <div
-                className={cn('not-prose w-full', codeClassName)}
+            <pre
+                className={cn(
+                    'not-prose no-scrollbar w-full min-w-0 overflow-x-auto text-[14px] outline-none has-data-[slot=tabs]:p-0',
+                    codeClassName,
+                )}
                 dangerouslySetInnerHTML={{ __html: html }}
             />
             {hasCopyButton && (

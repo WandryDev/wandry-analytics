@@ -65,17 +65,17 @@ export const HeroHeader = () => {
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
                                             <Button
-                                                asChild
                                                 variant="ghost"
                                                 size="sm"
-                                            >
-                                                <Link
-                                                    href={item.href}
-                                                    className="text-base"
-                                                >
-                                                    <span>{item.name}</span>
-                                                </Link>
-                                            </Button>
+                                                render={
+                                                    <Link
+                                                        href={item.href}
+                                                        className="text-base"
+                                                    >
+                                                        <span>{item.name}</span>
+                                                    </Link>
+                                                }
+                                            ></Button>
                                         </li>
                                     ))}
                                 </ul>
@@ -100,42 +100,42 @@ export const HeroHeader = () => {
                             {auth?.user ? (
                                 <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                                     <Button
-                                        asChild
                                         size="sm"
+                                        render={
+                                            <Link href={route('dashboard')}>
+                                                <span>Go to dashboard</span>
+                                            </Link>
+                                        }
                                         className={cn(
                                             isScrolled && 'lg:hidden',
                                         )}
-                                    >
-                                        <Link href={route('dashboard')}>
-                                            <span>Go to dashboard</span>
-                                        </Link>
-                                    </Button>
+                                    ></Button>
                                 </div>
                             ) : (
                                 <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                                     <Button
-                                        asChild
                                         variant="ghost"
                                         size="sm"
+                                        render={
+                                            <Link href={route('login')}>
+                                                <span>Login</span>
+                                            </Link>
+                                        }
                                         className={cn(
                                             isScrolled && 'lg:hidden',
                                         )}
-                                    >
-                                        <Link href={route('login')}>
-                                            <span>Login</span>
-                                        </Link>
-                                    </Button>
+                                    ></Button>
                                     <Button
-                                        asChild
                                         size="sm"
+                                        render={
+                                            <Link href={route('register')}>
+                                                <span>Sign Up</span>
+                                            </Link>
+                                        }
                                         className={cn(
                                             isScrolled && 'lg:hidden',
                                         )}
-                                    >
-                                        <Link href={route('register')}>
-                                            <span>Sign Up</span>
-                                        </Link>
-                                    </Button>
+                                    ></Button>
                                 </div>
                             )}
                         </div>

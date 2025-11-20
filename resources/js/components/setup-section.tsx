@@ -33,14 +33,14 @@ export const SetupSection: React.FC = () => {
                                 </div>
                                 <div className="relative z-10 mt-6 space-y-2 text-center">
                                     <Button
-                                        asChild
                                         size="sm"
                                         className="w-full"
-                                    >
-                                        <Link href={route('register')}>
-                                            <span>Create an account</span>
-                                        </Link>
-                                    </Button>
+                                        render={
+                                            <Link href={route('register')}>
+                                                <span>Create an account</span>
+                                            </Link>
+                                        }
+                                    ></Button>
                                     <p className="text-muted-foreground">
                                         Sign up to access your dashboard and
                                         start tracking installations

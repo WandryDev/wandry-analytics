@@ -80,27 +80,33 @@ export const SiteNav: React.FC = () => {
 
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit lg:border-l lg:pl-6">
                                 {auth?.user ? (
-                                    <Button asChild size="sm">
-                                        <Link href={route('dashboard')}>
-                                            <span>Go to dashboard</span>
-                                        </Link>
-                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        render={
+                                            <Link href={route('dashboard')}>
+                                                <span>Go to dashboard</span>
+                                            </Link>
+                                        }
+                                    ></Button>
                                 ) : (
                                     <>
                                         <Button
-                                            asChild
                                             variant="outline"
                                             size="sm"
-                                        >
-                                            <Link href={route('login')}>
-                                                <span>Login</span>
-                                            </Link>
-                                        </Button>
-                                        <Button asChild size="sm">
-                                            <Link href={route('register')}>
-                                                <span>Sign Up</span>
-                                            </Link>
-                                        </Button>
+                                            render={
+                                                <Link href={route('login')}>
+                                                    <span>Login</span>
+                                                </Link>
+                                            }
+                                        ></Button>
+                                        <Button
+                                            size="sm"
+                                            render={
+                                                <Link href={route('register')}>
+                                                    <span>Sign Up</span>
+                                                </Link>
+                                            }
+                                        ></Button>
                                     </>
                                 )}
                             </div>

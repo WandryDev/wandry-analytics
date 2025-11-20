@@ -22,14 +22,12 @@ export const CreateRegistryForm: React.FC<CreateRegistryFormProps> = ({
             resetOnSuccess
         >
             <TextField
-                tabIndex={1}
                 name="name"
                 label="Registry name"
                 placeholder="@wandry-ui"
                 description="The name can be arbitrary — it will be displayed in the menu."
             />
             <TextField
-                tabIndex={2}
                 name="url"
                 label="Registry URL"
                 placeholder="https://wandry-ui.com"

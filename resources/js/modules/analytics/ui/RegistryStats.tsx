@@ -44,14 +44,18 @@ export const RegistryStats: React.FC = () => {
     return (
         <div className="space-y-4 px-6 py-10">
             <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold">{registry.name}</h1>
+                <h1 className="font-heading text-3xl font-medium">
+                    {registry.name}
+                </h1>
                 <div className="flex items-center gap-x-2">
                     <PeriodFilter />
-                    <Button asChild>
-                        <Link href={route('registry.edit', registry.id)}>
-                            Edit registry
-                        </Link>
-                    </Button>
+                    <Button
+                        render={
+                            <Link href={route('registry.edit', registry.id)}>
+                                Edit registry
+                            </Link>
+                        }
+                    ></Button>
                 </div>
             </div>
             <RegistryTotals data={registryTotals} />
