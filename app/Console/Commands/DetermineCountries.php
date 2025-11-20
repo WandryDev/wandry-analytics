@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Event;
-use App\Models\Registry;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;

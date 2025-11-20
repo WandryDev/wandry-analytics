@@ -46,6 +46,12 @@ class EventService
             return $event;
         }
 
+        if(!$registry->country_stats) {
+            $data->country = 'unknown';
+            $data->country_code = 'unknown';
+            $data->city = 'unknown';
+        }
+
         $data->eventable_type = Registry::class;
         $data->eventable_id = $registry->id;
         $data->created_at = Carbon::now();
