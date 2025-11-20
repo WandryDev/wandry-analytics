@@ -37,7 +37,7 @@ function CreateRegistryModal({
                         : ''}
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]" tabIndex={-1}>
+            <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Create a new registry</DialogTitle>
                     <DialogDescription>

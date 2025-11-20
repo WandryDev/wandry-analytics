@@ -11,9 +11,13 @@ type RegistryEditPageProps = {
 };
 
 const RegistryEditPage: React.FC<RegistryEditPageProps> = ({ registry }) => {
-    console.log('Rendering Edit Page with registry:', registry);
     return (
-        <AppLayout breadcrumbs={[{ title: 'Edit registry', href: '/' }]}>
+        <AppLayout
+            breadcrumbs={[
+                { title: 'Back', href: route('registry.show', registry.id) },
+                { title: 'Edit registry', href: '/' },
+            ]}
+        >
             <Head title={registry.name} />
             <EditRegistryForm defaultValue={registry} />
         </AppLayout>

@@ -83,13 +83,16 @@ export default function HeroSection() {
                                     item: itemVariants,
                                 }}
                             >
-                                <Button asChild size="lg">
-                                    <Link href={route('register')}>
-                                        <span className="btn-label">
-                                            Start analytics for free
-                                        </span>
-                                    </Link>
-                                </Button>
+                                <Button
+                                    size="lg"
+                                    render={
+                                        <Link href={route('register')}>
+                                            <span className="btn-label">
+                                                Start analytics for free
+                                            </span>
+                                        </Link>
+                                    }
+                                ></Button>
                             </AnimatedGroup>
                         </div>
                     </div>

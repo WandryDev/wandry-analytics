@@ -26,11 +26,14 @@ export default function Pricing() {
                                 </span>
 
                                 <div className="flex justify-center">
-                                    <Button asChild size="lg">
-                                        <Link href={route('login')}>
-                                            Get started
-                                        </Link>
-                                    </Button>
+                                    <Button
+                                        size="lg"
+                                        render={
+                                            <Link href={route('login')}>
+                                                Get started
+                                            </Link>
+                                        }
+                                    ></Button>
                                 </div>
 
                                 <p className="mt-12 text-sm text-muted-foreground">

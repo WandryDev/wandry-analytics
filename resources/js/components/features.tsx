@@ -116,13 +116,17 @@ export default function Features() {
                                 </p>
                             </div>
                         ))}
-                        <Button asChild size="lg" className="mt-10 w-max">
-                            <Link href={route('register')}>
-                                <span className="btn-label">
-                                    Start collect statistics
-                                </span>
-                            </Link>
-                        </Button>
+                        <Button
+                            size="lg"
+                            className="mt-10 w-max"
+                            render={
+                                <Link href={route('register')}>
+                                    <span className="btn-label">
+                                        Start collect statistics
+                                    </span>
+                                </Link>
+                            }
+                        ></Button>
                     </div>
                     <div className="hidden overflow-hidden rounded-md md:block">
                         <AnimatePresence mode="wait">
@@ -160,13 +164,16 @@ export default function Features() {
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 1, delay: 0.3 }}
                                 >
-                                    <Button asChild size="lg">
-                                        <Link href={route('register')}>
-                                            <span className="btn-label">
-                                                Add your Registry now
-                                            </span>
-                                        </Link>
-                                    </Button>
+                                    <Button
+                                        size="lg"
+                                        render={
+                                            <Link href={route('register')}>
+                                                <span className="btn-label">
+                                                    Add your Registry now
+                                                </span>
+                                            </Link>
+                                        }
+                                    ></Button>
                                 </motion.div>
                             </AnimatePresence>
                         )}

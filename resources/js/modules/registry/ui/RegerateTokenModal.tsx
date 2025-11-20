@@ -40,7 +40,7 @@ export const RegerateTokenModal: React.FC<RegerateTokenModalProps> = ({
                     Regenerate token
                 </Button>
             </DialogTrigger>
-            <DialogContent className="md:max-w-[65vw]">
+            <DialogContent className="md:max-w-[80vw]">
                 <DialogHeader>
                     <DialogTitle>Create a new token</DialogTitle>
                 </DialogHeader>
@@ -71,7 +71,7 @@ const RegenerateTokenForm: React.FC<RegenerateTokenFormProps> = ({
     };
 
     return (
-        <div className="mt-4 w-[95%]">
+        <div className="mt-4 w-full">
             <Field>
                 <FieldLabel>Your token</FieldLabel>
                 <InputGroup>
