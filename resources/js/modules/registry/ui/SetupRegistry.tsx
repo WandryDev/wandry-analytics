@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Form } from '@wandry/inertia-form';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { CodeBlock } from '@/components/code-block';
 import { PublicSetupCodeBlock } from '@/components/setup-code-block';
-import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/ui/tabs';
+import {
+    AnimatedTabPanel,
+    AnimatedTabPanels,
+    Tabs,
+    TabsList,
+    TabsPanel,
+    TabsTab,
+} from '@/components/ui/tabs';
 
 import TextField from '@/components/text-field';
 import SwitchField from '@/components/switch-field';
 import SubmitButton from '@/components/submit-button';
 import { StepItem } from '@/components/step';
+import { authRegistryCode } from '@/config/code';
 
 type SetupRegistryProps = {
     token: string;
@@ -42,79 +51,88 @@ export const SetupRegistry: React.FC<SetupRegistryProps> = ({
                     </TabsList>
 
                     <TabsPanel value="public" className="space-y-6">
-                        <div className="space-y-5">
-                            <StepItem
-                                stepNumber={1}
-                                title="Install @wandry/analytics-sdk"
-                            />
+                        <AnimatedTabPanel className="min-h-[60vh]">
+                            <div className="space-y-5">
+                                <StepItem
+                                    stepNumber={1}
+                                    title="Install @wandry/analytics-sdk"
+                                />
 
-                            <CodeBlock
-                                code={`npm install @wandry/analytics-sdk`}
-                                lang="bash"
-                                minHeight="min-h-15"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <StepItem
-                                stepNumber={2}
-                                title="Get the token and add it to your project."
-                            />
+                                <CodeBlock
+                                    code={`npm install @wandry/analytics-sdk`}
+                                    lang="bash"
+                                    minHeight="min-h-15"
+                                />
+                            </div>
+                            <div className="mt-5 space-y-2">
+                                <StepItem
+                                    stepNumber={2}
+                                    title="Get the token and add it to your project."
+                                />
 
-                            <TextField readOnly name="token" />
-                        </div>
-                        <div className="space-y-2">
-                            <StepItem
-                                stepNumber={2}
-                                title="Start tracking events for fetching
+                                <TextField readOnly name="token" />
+                            </div>
+                            <div className="mt-5 space-y-2">
+                                <StepItem
+                                    stepNumber={2}
+                                    title="Start tracking events for fetching
                                     registry.json in your code."
-                                description={
-                                    <p className="mb-4 text-sm text-muted-foreground">
-                                        For a Nextjs project paste this code
-                                        snippet in your middleware or API route
-                                    </p>
-                                }
-                            />
+                                    description={
+                                        <p className="mb-4 text-sm text-muted-foreground">
+                                            For a Nextjs project paste this code
+                                            snippet in your middleware or API
+                                            route
+                                        </p>
+                                    }
+                                />
 
-                            <PublicSetupCodeBlock token={token} />
-                        </div>
+                                <PublicSetupCodeBlock token={token} />
+                            </div>
+                        </AnimatedTabPanel>
                     </TabsPanel>
 
                     <TabsPanel value="private" className="space-y-6">
-                        <div className="space-y-5">
-                            <StepItem
-                                stepNumber={1}
-                                title="Install @wandry/analytics-sdk"
-                            />
+                        <AnimatedTabPanel className="min-h-[80vh]">
+                            <div className="space-y-5">
+                                <StepItem
+                                    stepNumber={1}
+                                    title="Install @wandry/analytics-sdk"
+                                />
 
-                            <CodeBlock
-                                code={`npm install @wandry/analytics-sdk`}
-                                lang="bash"
-                                minHeight="min-h-15"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <StepItem
-                                stepNumber={2}
-                                title="Get the token and add it to your project."
-                            />
+                                <CodeBlock
+                                    code={`npm install @wandry/analytics-sdk`}
+                                    lang="bash"
+                                    minHeight="min-h-15"
+                                />
+                            </div>
+                            <div className="mt-5 space-y-2">
+                                <StepItem
+                                    stepNumber={2}
+                                    title="Get the token and add it to your project."
+                                />
 
-                            <TextField readOnly name="token" />
-                        </div>
-                        <div className="space-y-2">
-                            <StepItem
-                                stepNumber={2}
-                                title="Start tracking events for fetching
+                                <TextField readOnly name="token" />
+                            </div>
+                            <div className="mt-5 space-y-2">
+                                <StepItem
+                                    stepNumber={2}
+                                    title="Start tracking events for fetching
                                     registry.json in your code."
-                                description={
-                                    <p className="mb-4 text-sm text-muted-foreground">
-                                        For a Nextjs project paste this code
-                                        snippet in your middleware or API route
-                                    </p>
-                                }
-                            />
+                                    description={
+                                        <p className="mb-4 text-sm text-muted-foreground">
+                                            For a Nextjs project paste this code
+                                            snippet in your middleware or API
+                                            route
+                                        </p>
+                                    }
+                                />
 
-                            <PublicSetupCodeBlock token={token} />
-                        </div>
+                                <CodeBlock
+                                    code={authRegistryCode(token)}
+                                    lang="typescript"
+                                />
+                            </div>
+                        </AnimatedTabPanel>
                     </TabsPanel>
                 </Tabs>
                 <div className="mt-4 flex items-start border-t pt-6">

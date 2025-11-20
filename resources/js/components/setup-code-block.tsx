@@ -1,6 +1,13 @@
 import React from 'react';
 import { CodeBlock } from './code-block';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+    AnimatedTabPanel,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsPanel,
+    TabsTrigger,
+} from '@/components/ui/tabs';
 import { middlewareCode, proxyCode } from '@/config/code';
 
 type SetupCodeBlockProps = {
@@ -16,12 +23,16 @@ export const PublicSetupCodeBlock: React.FC<SetupCodeBlockProps> = ({
                 <TabsTrigger value="middleware">middleware.ts</TabsTrigger>
                 <TabsTrigger value="proxy">proxy.ts</TabsTrigger>
             </TabsList>
-            <TabsContent value="middleware">
-                <CodeBlock code={middlewareCode(token)} lang="typescript" />
-            </TabsContent>
-            <TabsContent value="proxy">
-                <CodeBlock code={proxyCode(token)} lang="typescript" />
-            </TabsContent>
+            <TabsPanel value="middleware">
+                <AnimatedTabPanel className="min-h-[35vh]">
+                    <CodeBlock code={middlewareCode(token)} lang="typescript" />
+                </AnimatedTabPanel>
+            </TabsPanel>
+            <TabsPanel value="proxy">
+                <AnimatedTabPanel className="min-h-[35vh]">
+                    <CodeBlock code={proxyCode(token)} lang="typescript" />
+                </AnimatedTabPanel>
+            </TabsPanel>
         </Tabs>
     );
 };

@@ -3,6 +3,8 @@
 import { Tabs as TabsPrimitive } from '@base-ui-components/react/tabs';
 
 import { cn } from '@/lib/utils';
+import { PropsWithChildren } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 
 type TabsVariant = 'default' | 'underline';
 
@@ -80,6 +82,25 @@ function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
     );
 }
 
+const AnimatedTabPanel: React.FC<
+    PropsWithChildren & { className?: string }
+> = ({ children, className }) => {
+    return (
+        <AnimatePresence mode="wait">
+            <motion.div
+                key="private-tab"
+                initial={{ y: 10, opacity: 0, filter: 'blur(5px)' }}
+                animate={{ y: 0, opacity: 1, filter: 'blur(0)' }}
+                exit={{ y: -10, opacity: 0, filter: 'blur(5px)' }}
+                transition={{ duration: 0.2 }}
+                className={className}
+            >
+                {children}
+            </motion.div>
+        </AnimatePresence>
+    );
+};
+
 export {
     Tabs,
     TabsList,
@@ -87,4 +108,5 @@ export {
     TabsTab as TabsTrigger,
     TabsPanel,
     TabsPanel as TabsContent,
+    AnimatedTabPanel,
 };
