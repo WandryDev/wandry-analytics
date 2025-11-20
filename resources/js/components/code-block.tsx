@@ -43,7 +43,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     return (
         <div
             className={cn(
-                'relative w-full rounded-lg bg-muted px-4 py-2 pr-15',
+                'relative w-full rounded-lg border border-border bg-muted px-4 py-2 pr-15',
                 containerClassName,
             )}
         >

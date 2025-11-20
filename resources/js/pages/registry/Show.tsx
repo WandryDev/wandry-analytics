@@ -31,13 +31,11 @@ export default function Show() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={registry.name} />
-            <SetupRegistry registry={registry} token={token} />
-            {/* <RegistryStats /> */}
-            {/* {!page.props.token ? (
+            {!page.props.token ? (
                 <RegistryStats />
             ) : (
                 <SetupRegistry registry={registry} token={token} />
-            )} */}
+            )}
         </AppLayout>
     );
 }
